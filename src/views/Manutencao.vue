@@ -3,7 +3,7 @@
         <div style="display: flex;justify-content: center;margin-bottom: 40px">
             <h2>Manutenção</h2>
         </div>
-        <v-form>
+        <v-form lazy-validation ref="form">
             <v-row style="justify-content: center">
                 <v-col
                     style="margin: 10px"
@@ -11,6 +11,7 @@
                     md="3"
                 >
                     <v-text-field
+                        v-model="pessoa.Nome_Completo"
                         label="Nome Completo"
                         solo
                         dense
@@ -22,6 +23,7 @@
                     md="3"
                 >
                     <v-text-field
+                        v-model="pessoa.IdPlataforma"
                         label="Id Plataforma"
                         solo
                         dense
@@ -37,6 +39,7 @@
                         label="Plataforma"
                         item-text="nome"
                         item-value="id"
+                        v-model="pessoa.Plataforma"
                         solo
                         dense
                     ></v-select>
@@ -52,6 +55,7 @@
             <v-row  justify="center" no-gutters>
               <v-col align="center">
                 <v-btn
+                @click="salvar()"
                 color="primary"
                 style="border-radius: 8px"
                 dark>
@@ -64,13 +68,30 @@
 </template>
 
 <script>
+import * as ManutencaoService from "@/services/ManutencaoService.js"
     export default{
         data:()=>{
             return {
-                items: [{nome: "Lattes", id: "L"},{nome: "Scholar", id: "S"},{nome:"OCID",id:"O"}]
+                items: [{nome: "Lattes", id: "L"},{nome: "Scholar", id: "S"},{nome:"OCID",id:"O"}],
+                pessoa: {
+                    IdPessoa: null,
+                    Nome_Completo: null,
+                    IdPlataforma: null,
+                    Plataforma: null,
+                }
             }
         },
         methods:{
+            salvar(){
+                if(this.$refs.form.validate()){
+                    ManutencaoService.salvar(this.pessoa).then((res)=>{
+                        console.log(res)
+                    }).catch((error)=>{
+                        console.log(error)
+                    })
+                }
+                    
+            },
             addElements(){
                 this.items.push
             },
