@@ -1,8 +1,12 @@
 import { DashBoardAxios } from "../plugins/axios";
 
 function salvar(pessoa){
-    console.log("entrou")
     return DashBoardAxios.post("/pessoas",pessoa);
 }
 
-export {salvar}
+function testar(){
+    console.log("sgf")
+    return DashBoardAxios.get("/pessoas/listar");
+}
+
+export {salvar,testar}

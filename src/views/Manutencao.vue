@@ -23,7 +23,7 @@
                     md="3"
                 >
                     <v-text-field
-                        v-model="pessoa.IdPlataforma"
+                        v-model="pessoa.idPlataforma"
                         label="Id Plataforma"
                         solo
                         dense
@@ -74,9 +74,9 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
             return {
                 items: [{nome: "Lattes", id: "L"},{nome: "Scholar", id: "S"},{nome:"OCID",id:"O"}],
                 pessoa: {
-                    IdPessoa: null,
+                    idPessoa: null,
                     Nome_Completo: null,
-                    IdPlataforma: null,
+                    idPlataforma: null,
                     Plataforma: null,
                 }
             }
@@ -84,8 +84,9 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
         methods:{
             salvar(){
                 if(this.$refs.form.validate()){
-                    ManutencaoService.salvar(this.pessoa).then((res)=>{
-                        console.log(res)
+                    console.log(this.pessoa)
+                    ManutencaoService.testar().then((res)=>{
+                        console.log(res.data);
                     }).catch((error)=>{
                         console.log(error)
                     })
