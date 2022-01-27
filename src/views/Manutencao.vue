@@ -44,11 +44,6 @@
                         dense
                     ></v-select>
                 </v-col>
-                <v-col style="margin: 15px"
-                    cols="6"
-                    md="2">
-                    <i class="fas fa-plus-circle" style="font-size:30px" @click="nada"></i>
-                </v-col>
             </v-row>
         </v-form>
         <v-card-actions>
@@ -85,7 +80,7 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
             salvar(){
                 if(this.$refs.form.validate()){
                     console.log(this.pessoa)
-                    ManutencaoService.testar().then((res)=>{
+                    ManutencaoService.salvar(this.pessoa).then((res)=>{
                         console.log(res.data);
                     }).catch((error)=>{
                         console.log(error)

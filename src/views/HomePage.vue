@@ -13,8 +13,9 @@
                         <v-text-field
                             label="Digite o nome"
                             style="margin-top: 40px"
+                            v-model="nomePesquisa"
                         ></v-text-field>
-                        <v-btn color="primary" style="margin-top: 40px" >
+                        <v-btn color="primary" style="margin-top: 40px" @click="nada()">
                             <v-icon>fa-search</v-icon>
                         </v-btn>
                     </v-row>
@@ -28,8 +29,13 @@
 <script>
     export default {
         data: () => ({
-            
+            nomePesquisa: null,
         }),
+        methods:{
+            nada(){
+                console.log("teste")
+            }
+        }
   }
 
 </script>
