@@ -5,7 +5,6 @@ function salvar(pessoa){
 }
 
 function testar(){
-    console.log("sgf")
     return DashBoardAxios.get("/pessoas/listar");
 }
 

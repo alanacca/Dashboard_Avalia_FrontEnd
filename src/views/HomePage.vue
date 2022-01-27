@@ -15,7 +15,7 @@
                             style="margin-top: 40px"
                             v-model="nomePesquisa"
                         ></v-text-field>
-                        <v-btn color="primary" style="margin-top: 40px" @click="nada()">
+                        <v-btn color="primary" style="margin-top: 40px" @click="pesquisar()">
                             <v-icon>fa-search</v-icon>
                         </v-btn>
                     </v-row>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import * as HomePageService from '@/services/HomePage.js'
     export default {
         data: () => ({
             nomePesquisa: null,
@@ -34,6 +35,11 @@
         methods:{
             nada(){
                 console.log("teste")
+            },
+            pesquisar(){
+                HomePageService.pesquisar(this.nomePesquisa).then((res)=>{
+                    console.log(res.data)
+                })
             }
         }
   }
