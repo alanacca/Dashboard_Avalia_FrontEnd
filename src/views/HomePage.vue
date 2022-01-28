@@ -10,12 +10,15 @@
                         src="@/assets/DashBoard__1 (1).png"
                     ></v-img>
                     <v-row >
-                        <v-text-field
+                        <v-autocomplete
                             label="Digite o nome"
+                            :items="items"
+                            item-text="nome_Completo"
+                            return-object
                             style="margin-top: 40px"
-                            v-model="nomePesquisa"
-                        ></v-text-field>
-                        <v-btn color="primary" style="margin-top: 40px" @click="pesquisar()">
+                            v-model="currentPesquisa"
+                        ></v-autocomplete>
+                        <v-btn color="primary" style="margin-top: 40px" @click="nada()">
                             <v-icon>fa-search</v-icon>
                         </v-btn>
                     </v-row>
@@ -28,19 +31,28 @@
 
 <script>
 import * as HomePageService from '@/services/HomePage.js'
+import * as ManutencaoService from '@/services/ManutencaoService.js'
     export default {
         data: () => ({
-            nomePesquisa: null,
+            currentPesquisa: null,
+            items: []
         }),
         methods:{
             nada(){
-                console.log("teste")
+                console.log("Pesquisar")
+                console.log(this.currentPesquisa)
             },
             pesquisar(){
                 HomePageService.pesquisar(this.nomePesquisa).then((res)=>{
                     console.log(res.data)
                 })
             }
+        },
+        beforeMount(){
+            ManutencaoService.findAll().then((res)=>{
+                this.items = res.data
+                console.log(this.items)
+            })
         }
   }
 

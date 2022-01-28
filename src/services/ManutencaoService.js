@@ -4,8 +4,8 @@ function salvar(pessoa){
     return DashBoardAxios.post("/pessoas",pessoa);
 }
 
-function testar(){
+function findAll(){
     return DashBoardAxios.get("/pessoas/listar");
 }
 
-export {salvar,testar}
+export {salvar,findAll}
