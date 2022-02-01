@@ -13,12 +13,12 @@
                         <v-autocomplete
                             label="Digite o nome"
                             :items="items"
-                            item-text="nome_Completo"
+                            item-text="nomeCompleto"
                             return-object
                             style="margin-top: 40px"
                             v-model="currentPesquisa"
                         ></v-autocomplete>
-                        <v-btn color="primary" style="margin-top: 40px" @click="nada()">
+                        <v-btn color="primary" style="margin-top: 40px" @click="pesquisar()">
                             <v-icon>fa-search</v-icon>
                         </v-btn>
                     </v-row>
@@ -44,7 +44,7 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
             },
             pesquisar(){
                 HomePageService.pesquisar(this.nomePesquisa).then((res)=>{
-                    console.log(res.data)
+                    console.log(res)
                 })
             }
         },
