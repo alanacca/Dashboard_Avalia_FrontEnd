@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import * as HomePageService from '@/services/HomePage.js'
+import * as HomePageService from '@/services/HomePageService.js'
 import * as ManutencaoService from '@/services/ManutencaoService.js'
     export default {
         data: () => ({
@@ -43,7 +43,7 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 console.log(this.currentPesquisa)
             },
             pesquisar(){
-                HomePageService.pesquisar(this.nomePesquisa).then((res)=>{
+                HomePageService.pesquisar(this.currentPesquisa.idPessoa).then((res)=>{
                     console.log(res)
                 })
             }
