@@ -16,7 +16,7 @@
                             item-text="nomeCompleto"
                             return-object
                             style="margin-top: 40px"
-                            v-model="currentPesquisa"
+                            v-model="pessoaPesquisa"
                         ></v-autocomplete>
                         <v-btn color="primary" style="margin-top: 40px" @click="pesquisar()">
                             <v-icon>fa-search</v-icon>
@@ -34,16 +34,16 @@ import * as HomePageService from '@/services/HomePageService.js'
 import * as ManutencaoService from '@/services/ManutencaoService.js'
     export default {
         data: () => ({
-            currentPesquisa: null,
+            pessoaPesquisa: null,
             items: []
         }),
         methods:{
             nada(){
                 console.log("Pesquisar")
-                console.log(this.currentPesquisa)
+                console.log(this.pessoaPesquisa)
             },
             pesquisar(){
-                HomePageService.pesquisar(this.currentPesquisa.idPessoa).then((res)=>{
+                HomePageService.pesquisar(this.pessoaPesquisa.idPessoa).then((res)=>{
                     console.log(res)
                 })
             }
