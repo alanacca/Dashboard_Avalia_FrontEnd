@@ -8,4 +8,12 @@ function findAll(){
     return DashBoardAxios.get("/pessoas/listar");
 }
 
-export {salvar,findAll}
+function existsByIdPlataforma(id){
+    return DashBoardAxios.get("/pessoas/verificaId/"+id);
+}
+
+function existsbyNomeCompleto(nome){
+    return DashBoardAxios.get("/pessoas/verificaNome/"+nome);
+}
+
+export {salvar,findAll,existsByIdPlataforma,existsbyNomeCompleto}
