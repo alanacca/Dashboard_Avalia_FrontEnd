@@ -3,24 +3,34 @@
         <v-app>
             <v-row style="display: flex; justify-content: center;margin-top: 120px; margin-bottom: 60px">
                 <v-col cols="12" md="6">
-                    <v-img
-                        style="margin: auto"
-                        max-height="150"
-                        max-width="290"
-                        src="@/assets/DashBoard__1 (1).png"
-                    ></v-img>
-                    <v-row >
-                        <v-autocomplete
-                            label="Digite o nome"
-                            :items="items"
-                            item-text="nomeCompleto"
-                            return-object
-                            style="margin-top: 40px"
-                            v-model="pessoaPesquisa"
-                        ></v-autocomplete>
-                        <v-btn color="primary" style="margin-top: 40px" @click="pesquisar()">
-                            <v-icon>fa-search</v-icon>
-                        </v-btn>
+                    <v-row>
+                        <v-img
+                            style="margin: auto;justify-content: center;display: grid;align-items: center"
+                            max-height="150"
+                            max-width="290"
+                            src="@/assets/DashBoard__1 (1).png"
+                        ></v-img>
+                    </v-row>
+                    <v-row style="justify-content: center; display: flex;margin-top:40px">
+                                <v-autocomplete
+                                    label="Digite o nome"
+                                    :items="cadastrados"
+                                    item-text="nomeCompleto"
+                                    return-object
+                                    v-model="pessoaPesquisa"
+                                ></v-autocomplete>
+
+                                    <v-autocomplete
+                                    :items="items"
+                                    label="Plataforma"
+                                    item-text="nome"
+                                    item-value="id"
+                                    style="margin-left: 10px;"
+                                    ></v-autocomplete>
+                        
+                            <v-btn color="primary" @click="pesquisar()">
+                                <v-icon>fa-search</v-icon>
+                            </v-btn>
                     </v-row>
                 </v-col>
             </v-row>
@@ -34,8 +44,9 @@ import * as HomePageService from '@/services/HomePageService.js'
 import * as ManutencaoService from '@/services/ManutencaoService.js'
     export default {
         data: () => ({
+            items: [{nome: "Lattes", id: "L"},{nome: "Scholar", id: "S"},{nome:"OCID",id:"O"}],
             pessoaPesquisa: null,
-            items: []
+            cadastrados: []
         }),
         methods:{
             nada(){
@@ -50,8 +61,8 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
         },
         beforeMount(){
             ManutencaoService.findAll().then((res)=>{
-                this.items = res.data
-                console.log(this.items)
+                this.cadastrados = res.data
+                console.log(this.cadastrados)
             })
         }
   }
