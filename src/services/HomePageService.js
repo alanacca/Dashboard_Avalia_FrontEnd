@@ -1,7 +1,7 @@
 import { DashBoardAxios } from "../plugins/axios";
 
-function pesquisar(id){
-    return DashBoardAxios.get('/pesquisa/'+id)
+function pesquisar(idPessoa,idPlat){
+    return DashBoardAxios.get('/pesquisa/'+idPessoa+'/'+idPlat)
 }
 
 

@@ -26,6 +26,7 @@
                                     item-text="descricao"
                                     item-value="id"
                                     style="margin-left: 10px;"
+                                    v-model="platIdPesquisa"
                                     ></v-autocomplete>
                     </v-row>
                     <v-row style="justify-content: center; display: flex">
@@ -47,6 +48,7 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
         data: () => ({
             items: [],
             pessoaPesquisa: null,
+            platIdPesquisa: null,
             cadastrados: []
         }),
         methods:{
@@ -55,7 +57,9 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 console.log(this.pessoaPesquisa)
             },
             pesquisar(){
-                HomePageService.pesquisar(this.pessoaPesquisa.idPessoa).then((res)=>{
+                console.log(this.pessoaPesquisa)
+                console.log(this.platIdPesquisa)
+                HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa).then((res)=>{
                     console.log(res)
                 })
             }
