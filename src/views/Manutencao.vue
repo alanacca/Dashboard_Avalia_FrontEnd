@@ -11,11 +11,10 @@
                     md="3"
                 >
                  <v-text-field
-                        v-model="pessoa.idPlataforma"
+                        v-model="plataformapessoa.idPlataforma"
                         label="Id Plataforma"
                         solo
                         dense
-                        @change="verificarExistencia()"
                         required
                     ></v-text-field>
                 </v-col>
@@ -25,11 +24,10 @@
                     md="3"
                 >
                 <v-text-field
-                        v-model="pessoa.Nome_Completo"
+                        v-model="plataformapessoa.fkPessoa.nomeCompleto"
                         label="Nome Completo"
                         solo
                         dense
-                        @change="verificarExistencia()"
                         required
                     ></v-text-field>
                    
@@ -40,11 +38,11 @@
                     md="2"
                 >
                     <v-select
-                        :items=items
+                        :items="items"
                         label="Plataforma"
-                        item-text="nome"
+                        item-text="descricao"
                         item-value="id"
-                        v-model="pessoa.Plataforma"
+                        v-model="plataformapessoa.fkPlataforma"
                         solo
                         dense
                         required
@@ -68,21 +66,21 @@
             </v-row>
         </v-card-actions>
         <v-dialog
-                v-model="dialogErro"
+                v-model="dialogSucesso"
                 max-width="290"
             >
     
         <v-card>
             <v-card-title class="text-h5">
-            Erro
+            Sucesso
             </v-card-title>
-            <v-card-text>Essa pessoa já está cadastrada</v-card-text>
+            <v-card-text>Pessoa Salva com Sucesso</v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
                 color="primary"
                 text
-                @click="confirmar"
+                @click="confirmarSucesso"
             >
                 Ok
             </v-btn>
@@ -121,12 +119,13 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
         data:()=>{
             return {
                 dialogErro: false,
-                items: [{nome: "Lattes", id: "L"},{nome: "Scholar", id: "S"},{nome:"OCID",id:"O"}],
-                pessoa: {
-                    idPessoa: null,
-                    Nome_Completo: null,
-                    idPlataforma: null,
-                    Plataforma: null,
+                dialogSucesso: false,
+                items: [],
+                plataformapessoa: {
+                    id: null,
+                    fkPessoa: {id: null, nomeCompleto: null},
+                    fkPlataforma: null,
+                    idPlataforma: null
                 }
             }
         },
@@ -140,10 +139,12 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
                return this.$refs.form.validate();
             },
             salvar(){
+                console.log(this.plataformapessoa)
                 if(this.$refs.form.validate()){
                     // console.log(this.pessoa)
-                    ManutencaoService.salvar(this.pessoa).then((res)=>{
-                        console.log(res.data);
+                    ManutencaoService.salvar(this.plataformapessoa).then((res)=>{
+                        console.log(res)
+                        this.dialogSucesso = true
                     }).catch((error)=>{
                         console.log(error)
                     })
@@ -156,9 +157,7 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
             verificarExistencia(){
                 if(this.pessoa.idPlataforma){
 
-                    console.log("teste nome completo")
                     ManutencaoService.existsByIdPlataforma(this.pessoa.idPlataforma).then((res)=>{
-                        console.log(res.data)
                         if(res.data){
                             this.dialogErro = true
                         }
@@ -167,9 +166,7 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
                     })
                 }
                 if(this.pessoa.Nome_Completo){
-                    console.log("teste nome completo")
                     ManutencaoService.existsbyNomeCompleto(this.pessoa.Nome_Completo).then((res)=>{
-                        console.log(res.data)
                         if(res.data){
                             this.dialogErro = true
                         }
@@ -180,12 +177,23 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
             },
             confirmar(){
                 this.dialogErro = false
-                this.pessoa.idPlataforma = null
-                this.pessoa.Nome_Completo = null
+                this.plataformapessoa.idPlataforma = null
+                this.plataformapessoa.fkPessoa.nomeCompleto = null
+            },
+            confirmarSucesso(){
+                this.dialogSucesso = false
+                this.plataformapessoa.idPlataforma = null
+                this.plataformapessoa.fkPessoa.nomeCompleto = null
+                this.plataformapessoa.fkPlataforma = null
             },
             nada(){
                 console.log("teste")
             }
+        },
+        beforeMount(){
+            ManutencaoService.findAllPlats().then((res)=>{
+                this.items = res.data
+            })
         }
     }
 </script>

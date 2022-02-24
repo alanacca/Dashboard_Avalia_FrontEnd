@@ -23,13 +23,14 @@
                                     <v-autocomplete
                                     :items="items"
                                     label="Plataforma"
-                                    item-text="nome"
+                                    item-text="descricao"
                                     item-value="id"
                                     style="margin-left: 10px;"
                                     ></v-autocomplete>
-                        
+                    </v-row>
+                    <v-row style="justify-content: center; display: flex">
                             <v-btn color="primary" @click="pesquisar()">
-                                <v-icon>fa-search</v-icon>
+                                Importar
                             </v-btn>
                     </v-row>
                 </v-col>
@@ -44,7 +45,7 @@ import * as HomePageService from '@/services/HomePageService.js'
 import * as ManutencaoService from '@/services/ManutencaoService.js'
     export default {
         data: () => ({
-            items: [{nome: "Lattes", id: "L"},{nome: "Scholar", id: "S"},{nome:"OCID",id:"O"}],
+            items: [],
             pessoaPesquisa: null,
             cadastrados: []
         }),
@@ -63,6 +64,10 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
             ManutencaoService.findAll().then((res)=>{
                 this.cadastrados = res.data
                 console.log(this.cadastrados)
+            })
+
+            ManutencaoService.findAllPlats().then((res)=>{
+                this.items = res.data
             })
         }
   }

@@ -1,11 +1,15 @@
 import { DashBoardAxios } from "../plugins/axios";
 
-function salvar(pessoa){
-    return DashBoardAxios.post("/pessoas",pessoa);
+function salvar(plataformapessoa){
+    return DashBoardAxios.post("/plataformapessoa",plataformapessoa);
 }
 
 function findAll(){
     return DashBoardAxios.get("/pessoas/listar");
+}
+
+function findAllPlats(){
+    return DashBoardAxios.get("/plataforma/listar");
 }
 
 function existsByIdPlataforma(id){
@@ -16,4 +20,4 @@ function existsbyNomeCompleto(nome){
     return DashBoardAxios.get("/pessoas/verificaNome/"+nome);
 }
 
-export {salvar,findAll,existsByIdPlataforma,existsbyNomeCompleto}
+export {salvar,findAll,existsByIdPlataforma,existsbyNomeCompleto,findAllPlats}
