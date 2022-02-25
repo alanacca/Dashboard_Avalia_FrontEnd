@@ -28,11 +28,17 @@
                                     style="margin-left: 10px;"
                                     v-model="platIdPesquisa"
                                     ></v-autocomplete>
+                                    
                     </v-row>
-                    <v-row style="justify-content: center; display: flex">
+                    <v-row style="justify-content: center; display: flex; marign-right=5px">
                             <v-btn color="primary" @click="pesquisar()">
                                 Importar
                             </v-btn>
+                            <v-progress-circular
+                                v-if="loading"
+                                indeterminate
+                                color="primary"
+                            ></v-progress-circular>
                     </v-row>
                 </v-col>
             </v-row>
@@ -47,6 +53,7 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
     export default {
         data: () => ({
             items: [],
+            loading: false,
             pessoaPesquisa: null,
             platIdPesquisa: null,
             cadastrados: []
@@ -57,17 +64,20 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 console.log(this.pessoaPesquisa)
             },
             pesquisar(){
-                console.log(this.pessoaPesquisa)
-                console.log(this.platIdPesquisa)
-                HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa).then((res)=>{
-                    console.log(res)
+                // console.log(this.pessoaPesquisa)
+                // console.log(this.platIdPesquisa)
+                this.loading = true
+                HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
+                .then(()=>{
+                    this.loading = false
+                    
                 })
             }
         },
         beforeMount(){
             ManutencaoService.findAll().then((res)=>{
                 this.cadastrados = res.data
-                console.log(this.cadastrados)
+                // console.log(this.cadastrados)
             })
 
             ManutencaoService.findAllPlats().then((res)=>{
