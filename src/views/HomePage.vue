@@ -70,6 +70,7 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
                 .then(()=>{
                     this.loading = false
+                    this.$router.push("/dashboard");
                     
                 })
             }
