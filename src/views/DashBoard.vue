@@ -5,24 +5,24 @@
 
         <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
 
-        <el-row :gutter="32">
-            <el-col :xs="24" :sm="24" :lg="8">
+        <v-row :gutter="32">
+            <v-col :xs="24" :sm="24" :lg="8">
                 <div class="chart-wrapper">
                     <h1>PUBLICAÇÕES</h1>
                     <bar-chart />
                 </div>
-            </el-col>
-            <el-col :xs="24" :sm="24" :lg="8">
+            </v-col>
+            <v-col :xs="24" :sm="24" :lg="8">
                 <div class="chart-wrapper">
                     <pie-chart />
                 </div>
-            </el-col>
-            <el-col :xs="24" :sm="24" :lg="8">
+            </v-col>
+            <!-- <v-col :xs="24" :sm="24" :lg="8">
                 <div class="chart-wrapper">
                     <bar-chart />
                 </div>
-            </el-col>
-        </el-row>
+            </v-col> -->
+        </v-row>
     </div>
 </template>
 
