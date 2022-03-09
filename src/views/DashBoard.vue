@@ -8,6 +8,7 @@
         <el-row :gutter="32">
             <el-col :xs="24" :sm="24" :lg="8">
                 <div class="chart-wrapper">
+                    <h1>PUBLICAÇÕES</h1>
                     <bar-chart />
                 </div>
             </el-col>
