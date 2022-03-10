@@ -6,15 +6,15 @@
         <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
 
         <v-row :gutter="32">
-            <v-col :xs="24" :sm="24" :lg="8">
+            <v-col :xs="24" :sm="24" :lg="6">
                 <div class="chart-wrapper">
                     <h1>PUBLICAÇÕES</h1>
-                    <bar-chart />
+                    <pie-chart />
                 </div>
             </v-col>
             <v-col :xs="24" :sm="24" :lg="8">
                 <div class="chart-wrapper">
-                    <pie-chart />
+                    <bar-chart />
                 </div>
             </v-col>
             <!-- <v-col :xs="24" :sm="24" :lg="8">
