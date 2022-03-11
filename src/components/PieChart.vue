@@ -1,5 +1,5 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+  <div :class="className" :style="{height:height,width:width}"/>
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      DashBoardService.countProducoes(3097665029936012).then((res)=>{
+      DashBoardService.countProducoes(window.document.URL.split('/')[5]).then((res)=>{
         this.qtd.capitulos = res.data.Capitulo
         this.qtd.artigoEventos = res.data.Artigo_Eventos
         this.qtd.periodicos= res.data.Periodico

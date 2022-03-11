@@ -9,15 +9,19 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
+        name: 'Homepage',
         component: HomePage
     },
     {
         path: '/manutencao',
+        name: 'Manutencao',
         component: Manutencao
     },
     {
-        path: '/dashboard',
-        component: DashBoard
+        path: '/dashboard/:idCurriculo',
+        name: 'DashBoard',
+        component: DashBoard,
+        props: true
     }
 ]
 

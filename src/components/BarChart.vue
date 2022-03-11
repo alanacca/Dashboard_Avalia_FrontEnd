@@ -6,6 +6,8 @@
 import * as echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
 import resize from './mixins/resize'
+// import * as DashBoardService from '../services/DashBoardService'
+
 
 const animationDuration = 6000
 
@@ -27,7 +29,12 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      qtd:{
+        artigoEventos: null,
+        capitulos: null,
+        periodicos: null,
+      }
     }
   },
   mounted() {
@@ -92,7 +99,7 @@ export default {
           type: 'bar',
           stack: 'vistors',
           barWidth: '60%',
-          data: [30, 52, 200, 334, 390, 330, 220],
+          data: [300, 52, 1000, 334, 390, 330, 220],
           animationDuration
         }]
       })

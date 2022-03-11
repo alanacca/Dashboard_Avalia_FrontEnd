@@ -64,13 +64,11 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 console.log(this.pessoaPesquisa)
             },
             pesquisar(){
-                // console.log(this.pessoaPesquisa)
-                // console.log(this.platIdPesquisa)
                 this.loading = true
                 HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
-                .then(()=>{
+                .then((res)=>{
                     this.loading = false
-                    
+                    this.$router.push("/dashboard/"+res.data.idPlataforma)
                 })
             }
         },
