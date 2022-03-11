@@ -4,4 +4,8 @@ function countProducoes(idCurriculo){
     return DashBoardAxios.get('/dashboard/contar/'+idCurriculo)
 }
 
-export{countProducoes}
+function listCapitulos(idCurriculo){
+    return DashBoardAxios.get('/capitulosAutores/listar/'+idCurriculo)
+}
+
+export{countProducoes,listCapitulos}

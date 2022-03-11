@@ -55,8 +55,6 @@ export default {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
 
-      console.log(this.qtd.artigoEventos)
-
       this.chart.setOption({
         tooltip: {
           trigger: 'item',
