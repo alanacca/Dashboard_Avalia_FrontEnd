@@ -22,4 +22,8 @@ function listPeriodicos(idCurriculo,page){
     });
 }
 
-export{countProducoes,listCapitulos, listArtigos, listPeriodicos}
+function findByCurriculo(idCurriculo){
+    return DashBoardAxios.get('/curriculo/'+idCurriculo);
+}
+
+export{countProducoes,listCapitulos, listArtigos, listPeriodicos,findByCurriculo}

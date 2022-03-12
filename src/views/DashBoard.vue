@@ -5,8 +5,10 @@
 
         <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
 
+        <h1 v-if="currentCurriculo">{{currentCurriculo.nome_COMPLETO}}</h1>
+
         <v-row :gutter="32">
-            <v-col :xs="24" :sm="24" :lg="8">
+            <v-col :xs="24" :sm="24" :lg="12">
                 <div class="chart-wrapper">
                     <h1>Publicações</h1>
                     <v-tabs
@@ -153,171 +155,8 @@
                             </v-tab-item>
                             
                         </v-tabs-items>
+                    
                            
-                </div>
-            </v-col>
-            <v-col :xs="24" :sm="24" :lg="4">
-                <div class="chart-wrapper">
-                    <h1>Lorem Ipsum</h1>
-                    <bar-chart />
-                </div>
-            </v-col>
-        </v-row>
-        <v-row :gutter="32">
-            <v-col :xs="24" :sm="24" :lg="8">
-                <div class="chart-wrapper">
-                    <h1>Publicações</h1>
-                    <v-tabs
-                        v-model="model"
-                        centered
-                        slider-color="yellow"
-                    >
-                        <v-tab :key = "1" :href = "`#tab-1`">Gráfico</v-tab>
-                        <v-tab :key = "2" :href = "`#tab-2`">Tabela Capitulos de Livro</v-tab>
-                        <v-tab :key = "3" :href = "`#tab-3`">Tabela Periodicos</v-tab>
-                        <v-tab :key = "4" :href = "`#tab-4`">Tabela Artigos em Eventos</v-tab>
-                    </v-tabs>
-                        <v-tabs-items v-model="model">
-                            <v-tab-item :key="1" :value="`tab-1`" style="justify-content: center;padding-top: 20px">
-                                <pie-chart />
-                            </v-tab-item>
-                            <v-tab-item :key="2" :value="`tab-2`">
-                                <v-simple-table>
-                                    <template v-slot:default>
-                                    <thead>
-                                        <tr>
-                                        <!--<th class="text-left">Id</th>-->
-                                        <th class="text-left">Sequencia de Produção</th>
-                                        <th class="text-left">DOI</th>
-                                        <th class="text-left">ISBN</th>
-                                        <th class="text-left">Título do Trabalho</th>
-                                        <th class="text-left">Ano do Trabalho</th>
-                                        <th class="text-left">Título do Livro</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        <td v-if="pageCapitulos.content.length < 1" colspan="5">Sem dados para mostrar</td>
-                                        </tr>
-                                        <tr v-for="item in pageCapitulos.content" :key="item.id">
-                                        <td>{{item.fkCapitulo.sequencia_PRODUCAO }}</td>
-                                        <td>{{item.fkCapitulo.doi }}</td>
-                                        <td>{{item.fkCapitulo.isbn }}</td>
-                                        <td>{{item.fkCapitulo.titulo }}</td>
-                                        <td>{{item.fkCapitulo.ano_TRABALHO }}</td>
-                                        <td>{{item.fkCapitulo.livro_TITULO }}</td>
-                                        </tr>
-                                    </tbody>
-
-                                        <tfoot>
-                                    
-                                    </tfoot>
-                                    </template>
-                                </v-simple-table>
-                                <div class="text-center">
-                                    <v-pagination :value="pageCapitulos.pageable.pageNumber + 1"    :total-visible="10"
-                                    :length="pageCapitulos.totalPages" @input="atualizarPaginaCapitulo" >                
-                                    </v-pagination>
-                                </div>
-
-
-                            </v-tab-item>
-                            <v-tab-item :key="3" :value="`tab-3`">
-                                <v-simple-table>
-                                    <template v-slot:default>
-                                    <thead>
-                                        <tr>
-                                        <!--<th class="text-left">Id</th>-->
-                                        <th class="text-left">Sequencia de Produção</th>
-                                        <th class="text-left">DOI</th>
-                                        <th class="text-left">ISSN </th>
-                                        <th class="text-left">Título do Artigo </th>
-                                        <th class="text-left">Ano do Artigo</th>
-                                        <th class="text-left">Título do Periodico ou Revista</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        <td v-if="pagePeriodicos.content.length < 1" colspan="5">Sem dados para mostrar</td>
-                                        </tr>
-                                        <tr v-for="item in pagePeriodicos.content" :key="item.id">
-                                        <td>{{item.fkPeriodicos.sequencia_PRODUCAO }}</td>
-                                        <td>{{item.fkPeriodicos.doi }}</td>
-                                        <td>{{item.fkPeriodicos.issn }}</td>
-                                        <td>{{item.fkPeriodicos.titulo_DO_ARTIGO }}</td>
-                                        <td>{{item.fkPeriodicos.ano_DO_ARTIGO }}</td>
-                                        <td>{{item.fkPeriodicos.titulo_DO_PERIODICO_OU_REVISTA }}</td>
-
-                                        </tr>
-                                    </tbody>
-
-                                        <tfoot>
-                                    
-                                    </tfoot>
-                                    </template>
-                                </v-simple-table>
-                                <div class="text-center">
-                                    <v-pagination :value="pagePeriodicos.pageable.pageNumber + 1"    :total-visible="10"
-                                    :length="pagePeriodicos.totalPages" @input="atualizarPaginaPeriodico" >                
-                                    </v-pagination>
-                                </div>
-
-
-                            </v-tab-item>
-
-                            <v-tab-item :key="4" :value="`tab-4`">
-                                <v-simple-table>
-                                    <template v-slot:default>
-                                    <thead>
-                                        <tr>
-                                        <!--<th class="text-left">Id</th>-->
-                                        <th class="text-left">Sequencia de Produção</th>
-                                        <th class="text-left">Nome do Evento </th>
-                                        <th class="text-left">Classificação do Evento </th>
-                                        <th class="text-left">País do Evento </th>
-                                        <th class="text-left">Título do Trabalho</th>
-                                        <th class="text-left">Ano do Trabalho</th>
-                                        <th class="text-left">Titulo Anais</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        <td v-if="pageArtigos.content.length < 1" colspan="5">Sem dados para mostrar</td>
-                                        </tr>
-                                        <tr v-for="item in pageArtigos.content" :key="item.id">
-                                        <td>{{item.fkArtigoEvento.sequencia_PRODUCAO }}</td>
-                                        <td>{{item.fkArtigoEvento.nome_EVENTO }}</td>
-                                        <td>{{item.fkArtigoEvento.classificacao_EVENTO }}</td>
-                                        <td>{{item.fkArtigoEvento.pais_EVENTO }}</td>
-                                        <td>{{item.fkArtigoEvento.titulo }}</td>
-                                        <td>{{item.fkArtigoEvento.ano_TRABALHO }}</td>
-                                        <td>{{item.fkArtigoEvento.titulo_ANAIS_OU_PROCEEDINGS }}</td>
-
-                                        </tr>
-                                    </tbody>
-
-                                        <tfoot>
-                                    
-                                    </tfoot>
-                                    </template>
-                                </v-simple-table>
-                                <div class="text-center">
-                                    <v-pagination :value="pageArtigos.pageable.pageNumber + 1"    :total-visible="10"
-                                    :length="pageArtigos.totalPages" @input="atualizarPaginaArtigo" >                
-                                    </v-pagination>
-                                </div>
-
-
-                            </v-tab-item>
-                            
-                        </v-tabs-items>
-                           
-                </div>
-            </v-col>
-            <v-col :xs="24" :sm="24" :lg="4">
-                <div class="chart-wrapper">
-                    <h1>Lorem Ipsum</h1>
-                    <bar-chart />
                 </div>
             </v-col>
         </v-row>
@@ -326,7 +165,7 @@
 
 <script>
 // import GithubCorner from '../components/GithubCorner'
-import BarChart from '../components/BarChart.vue'
+// import BarChart from '../components/BarChart.vue'
 import PieChart from '../components/PieChart.vue'
 import * as DashBoardService from '../services/DashBoardService.js'
 // import PanelGroup from '../components/PanelGroup.vue'
@@ -341,11 +180,12 @@ const lineChartData = {
 export default {
     props:["idCurriculo"],
     components:{
-        BarChart,
+        // BarChart,
         PieChart,
     },
     data() {
         return {
+            currentCurriculo: null,
             lineChartData: lineChartData.newVisitis,
             model: 'tab-1',
             pageCapitulos: {content: {length:0}, pageable: {pageNumber:0}},
@@ -375,17 +215,23 @@ export default {
         }
     },
     mounted(){
-        DashBoardService.listCapitulos(3097665029936012,0).then((res)=>{
+        DashBoardService.listCapitulos(this.idCurriculo,0).then((res)=>{
             // console.log(res.data)
             this.pageCapitulos = res.data
         })
-        DashBoardService.listArtigos(3097665029936012,0).then((res)=>{
+        DashBoardService.listArtigos(this.idCurriculo,0).then((res)=>{
             // console.log(res.data)
             this.pageArtigos = res.data
         })
-        DashBoardService.listPeriodicos(3097665029936012,0).then((res)=>{
+        DashBoardService.listPeriodicos(this.idCurriculo,0).then((res)=>{
             // console.log(res.data)
             this.pagePeriodicos = res.data
+        })
+        
+    },
+    beforeMount(){
+        DashBoardService.findByCurriculo(this.idCurriculo).then((res)=>{
+            this.currentCurriculo = res.data
         })
     }
 }
