@@ -6,6 +6,7 @@
         <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
 
         <h1 v-if="currentCurriculo">{{currentCurriculo.nome_COMPLETO}}</h1>
+        <p v-if="currentCurriculo">{{currentCurriculo.resumo_CV}}</p>
 
         <v-row :gutter="32">
             <v-col :xs="24" :sm="24" :lg="12">
@@ -232,6 +233,7 @@ export default {
     beforeMount(){
         DashBoardService.findByCurriculo(this.idCurriculo).then((res)=>{
             this.currentCurriculo = res.data
+            console.log(this.currentCurriculo)
         })
     }
 }
