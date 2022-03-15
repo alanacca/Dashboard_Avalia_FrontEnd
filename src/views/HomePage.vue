@@ -68,7 +68,10 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
                 .then((res)=>{
                     this.loading = false
-                    this.$router.push("/dashboard/"+res.data.idPlataforma)
+                    console.log(res.data)
+                    if(res.data.fkPlataforma.sigla=="L"){
+                        this.$router.push("/dashboard/"+res.data.idPlataforma+"/"+res.data.fkPlataforma.descricao)
+                    }
                 })
             }
         },

@@ -4,9 +4,11 @@
         <github-corner class="github-corner" />
 
         <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
-
-        <h1 v-if="currentCurriculo">{{currentCurriculo.nome_COMPLETO}}</h1>
-        <p v-if="currentCurriculo">{{currentCurriculo.resumo_CV}}</p>
+        <div style="justify-items: center; align-item: center; display: grid">
+            <h3>Plataforma: {{descPlataforma}}</h3>
+            <h1 v-if="currentCurriculo">{{currentCurriculo.nome_COMPLETO}}</h1>
+            <p v-if="currentCurriculo">{{currentCurriculo.resumo_CV}}</p>
+        </div>
 
         <v-row :gutter="32">
             <v-col :xs="24" :sm="24" :lg="12">
@@ -179,7 +181,7 @@ const lineChartData = {
 }
 
 export default {
-    props:["idCurriculo"],
+    props:["idCurriculo","descPlataforma"],
     components:{
         // BarChart,
         PieChart,

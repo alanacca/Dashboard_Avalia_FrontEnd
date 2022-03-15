@@ -18,7 +18,7 @@ const routes = [
         component: Manutencao
     },
     {
-        path: '/dashboard/:idCurriculo',
+        path: '/dashboard/:idCurriculo/:descPlataforma',
         name: 'DashBoard',
         component: DashBoard,
         props: true
