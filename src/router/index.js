@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import Manutencao from '../views/Manutencao.vue'
 import DashBoard from '../views/DashBoard.vue'
+import Vinculo from '../views/Vinculo.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,12 @@ const routes = [
         path: '/dashboard/:idCurriculo/:descPlataforma',
         name: 'DashBoard',
         component: DashBoard,
+        props: true
+    },
+    {
+        path: '/vinculo',
+        name: 'Vinculo',
+        component: Vinculo,
         props: true
     }
 ]

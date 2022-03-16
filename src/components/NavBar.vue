@@ -5,10 +5,21 @@
         <v-btn text @click="home">
           <i class="fas fa-home"></i>
         </v-btn>
-        <v-btn text @click="manutencao">
-        <span>Manutenção</span>
-        <i class="fas fa-plus"></i>
-      </v-btn>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text v-bind="attrs" v-on="on">
+              <span>Ações</span>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-btn text @click="manutencao()">Adicionar Docente</v-btn>
+            </v-list-item>
+            <v-list-item>
+              <v-btn text @click="vinculo()">Adicionar Vínculo</v-btn>
+            </v-list-item>
+          </v-list>
+        </v-menu>
     </v-toolbar>
   </nav>
 </template>
@@ -23,6 +34,9 @@ export default {
         
     },
     methods: {
+        vinculo(){
+          if(this.$router.currentRoute.path !== '/vinculo') this.$router.push("/vinculo")
+        },
         manutencao(){
           if(this.$router.currentRoute.path !== '/manutencao') this.$router.push("/manutencao")
         },
