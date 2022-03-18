@@ -13,7 +13,7 @@ function findByVinculo(idVinculo){
 }
 
 function verificarLista(pessoas, idVinculo){
-    return DashBoardAxios.get('/pessoasVinculo/verificar/'+pessoas+'/'+idVinculo)
+    return DashBoardAxios.post('/pessoasVinculo/verificar/'+idVinculo,pessoas)
 }
 
 export {findAll, findSpecific, findByVinculo, verificarLista}

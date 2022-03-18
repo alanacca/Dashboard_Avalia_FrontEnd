@@ -18,6 +18,22 @@
                     :key="i"
                 >
                     <v-container fluid>
+                        <!-- <v-row
+                                        align="center"
+                                        justify="start"
+                                    >
+                                        <v-col
+                                            v-for="item in items"
+                                            :key="item.fkPessoa.id"
+                                        >
+                                            <v-chip
+                                                close
+                                                @click:close="testa()"
+                                            >
+                                                {{item.fkPessoa.nomeCompleto}}
+                                            </v-chip>
+                                        </v-col>
+                        </v-row> -->
                     <v-row
                                         align="center"
                                         justify="start"
@@ -30,7 +46,7 @@
                                             <v-chip
                                                 :disabled="loading"
                                                 close
-                                                @click:close="selected.splice(i, 1)"
+                                                @click:close="testa(i,selection)"
                                             >
                                             <v-icon
                                                 left
@@ -54,17 +70,17 @@
                                                     <v-icon
                                                     :disabled="loading"
                                                     v-text="item.icon"
-                                                    ></v-icon>
+                                                    ></v-icon> 
                                                 </v-list-item-avatar>
                                                 <v-list-item-title v-text="item.fkPessoa.nomeCompleto"></v-list-item-title>
                                             </v-list-item>
                                         </template>
                                     </v-list>
-                    </v-container>
+                    </v-container> 
                 </v-tab-item>
                 </v-tabs>
                 <v-btn style="justify-items: center" @click="testandoSave()">
-                    teste
+                    Salvar no Banco
                 </v-btn>
             </v-card>
         </template>
@@ -85,6 +101,7 @@ export default {
       loading: false,
       search: '',
       selected: [],
+      coiso: [],
        } 
     },
     computed:{
@@ -95,17 +112,17 @@ export default {
             const search = this.search.toLowerCase()
             if (!search) return this.items
                 return this.items.filter(item => {
-                    const text = item.text.toLowerCase()
+                    const text = item.fkPessoa.nomeCompleto.toLowerCase()
                     return text.indexOf(search) > -1
             })
-        },
+        },     
         selections () {
             const selections = []
             for (const selection of this.selected) {
-            selections.push(selection)
+                selections.push(selection)
             }
             return selections
-        },
+        },   
 
     },
     watch: {
@@ -114,7 +131,17 @@ export default {
         },
     },
     methods: {
+        testa(i, selection){
+            console.log(i)
+            console.log(selection)
+            this.selected.splice(i,1)
+            if(!this.items.includes(selection)){
+                this.items.push(selection)
+            }
+        },
         testandoSave(){
+            console.log(this.selected)
+            console.log(this.items)
             if(this.model==0){
                 this.vinculo = 1
             }else{
@@ -131,12 +158,11 @@ export default {
                 this.vinculo = 2
             }
             VinculoService.findSpecific(this.vinculo).then((res)=>{
-                // console.log(res)
                 this.items = res.data
             })
             VinculoService.findByVinculo(this.vinculo).then((res)=>{
-            this.selected = res.data
-        })
+                this.selected = res.data
+            })
         },
       next () {
         this.loading = true
@@ -149,13 +175,14 @@ export default {
     },
     beforeMount(){
         VinculoService.findSpecific(this.vinculo).then((res)=>{
-            console.log(res)
+            // console.log(res)
             this.items = res.data
         })
 
         VinculoService.findByVinculo(this.vinculo).then((res)=>{
             this.selected = res.data
         })
+        
         
     }
 }
