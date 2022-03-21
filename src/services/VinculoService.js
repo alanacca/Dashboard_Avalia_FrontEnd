@@ -20,4 +20,8 @@ function excluir(fkPessoa){
     return DashBoardAxios.delete('/pessoasVinculo/deletar/'+fkPessoa)
 }
 
-export {findAll, findSpecific, findByVinculo, verificarLista, excluir}
+function verifExist(fkPessoa){
+    return DashBoardAxios.get('pessoasVinculo/verificarExist/'+fkPessoa)
+}
+
+export {findAll, findSpecific, findByVinculo, verificarLista, excluir,verifExist}

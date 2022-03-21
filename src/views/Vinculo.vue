@@ -79,9 +79,11 @@
                     </v-container> 
                 </v-tab-item>
                 </v-tabs>
-                <v-btn style="justify-items: center" @click="testandoSave()">
-                    Salvar no Banco
-                </v-btn>
+                <v-card-actions style="justify-content: center;align-items: center;display:grid;margin-bottom: 10px">
+                    <v-btn color="primary" @click="testandoSave()">
+                        Salvar no Banco
+                    </v-btn>
+                </v-card-actions>
             </v-card>
         </template>
         <v-dialog
@@ -134,6 +136,7 @@ export default {
       posicaoExcluir: null,
       selected: [],
       coiso: [],
+      existePessoa: false,
        } 
     },
     computed:{
@@ -169,20 +172,27 @@ export default {
             this.posicaoExcluir = i
             console.log(i)
             console.log(selection)
-            // this.selected.splice(i,1)
-            // VinculoService.excluir(selection.fkPessoa.idPessoa)
-            // if(!this.items.includes(selection)){
-            //     this.items.push(selection)
-            // }
         },
         confirmarSucesso(){
-            this.dialogExcluir = false
-            this.selected.splice(this.posicaoExcluir,1)
-            VinculoService.excluir(this.pessoaExcluir.fkPessoa.idPessoa).then(()=>{
-                if(!this.items.includes(this.pessoaExcluir)){
-                this.items.push(this.pessoaExcluir)
-            }
+            VinculoService.verifExist(this.pessoaExcluir.fkPessoa.idPessoa).then((res)=>{
+                console.log(res.data)
+                if(res.data){
+                    this.dialogExcluir = false
+                    this.selected.splice(this.posicaoExcluir,1)
+                    VinculoService.excluir(this.pessoaExcluir.fkPessoa.idPessoa).then(()=>{
+                        if(!this.items.includes(this.pessoaExcluir)){
+                            this.items.push(this.pessoaExcluir)
+                        }
+                    })
+                }else{
+                    this.dialogExcluir = false
+                    this.selected.splice(this.posicaoExcluir,1)
+                    if(!this.items.includes(this.pessoaExcluir)){
+                        this.items.push(this.pessoaExcluir)
+                    }
+                }
             })
+            
             
         },
         cancelar(){
