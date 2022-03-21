@@ -16,4 +16,8 @@ function verificarLista(pessoas, idVinculo){
     return DashBoardAxios.post('/pessoasVinculo/verificar/'+idVinculo,pessoas)
 }
 
-export {findAll, findSpecific, findByVinculo, verificarLista}
+function excluir(fkPessoa){
+    return DashBoardAxios.delete('/pessoasVinculo/deletar/'+fkPessoa)
+}
+
+export {findAll, findSpecific, findByVinculo, verificarLista, excluir}

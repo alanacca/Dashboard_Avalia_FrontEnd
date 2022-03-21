@@ -84,6 +84,35 @@
                 </v-btn>
             </v-card>
         </template>
+        <v-dialog
+                v-model="dialogExcluir"
+                max-width="290"
+            >
+    
+        <v-card>
+            <v-card-title class="text-h5">
+            Alerta
+            </v-card-title>
+            <v-card-text>Deseja realmente retirar essa pessoa da lista?</v-card-text>
+            <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                color="primary"
+                text
+                @click="confirmarSucesso"
+            >
+                Sim
+            </v-btn>
+            <v-btn
+                color="primary"
+                text
+                @click="cancelar"
+            >
+                Não
+            </v-btn>
+            </v-card-actions>
+        </v-card>
+        </v-dialog>
     </v-app>
 </template>
 
@@ -94,12 +123,15 @@ import * as VinculoService from '../services/VinculoService'
 export default {
     data() {
        return {
+           dialogExcluir: false,
            model: '1',
            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
            vinculo: 1,
            items: [],
       loading: false,
       search: '',
+      pessoaExcluir: null,
+      posicaoExcluir: null,
       selected: [],
       coiso: [],
        } 
@@ -132,12 +164,31 @@ export default {
     },
     methods: {
         testa(i, selection){
+            this.dialogExcluir = true
+            this.pessoaExcluir = selection
+            this.posicaoExcluir = i
             console.log(i)
             console.log(selection)
-            this.selected.splice(i,1)
-            if(!this.items.includes(selection)){
-                this.items.push(selection)
+            // this.selected.splice(i,1)
+            // VinculoService.excluir(selection.fkPessoa.idPessoa)
+            // if(!this.items.includes(selection)){
+            //     this.items.push(selection)
+            // }
+        },
+        confirmarSucesso(){
+            this.dialogExcluir = false
+            this.selected.splice(this.posicaoExcluir,1)
+            VinculoService.excluir(this.pessoaExcluir.fkPessoa.idPessoa).then(()=>{
+                if(!this.items.includes(this.pessoaExcluir)){
+                this.items.push(this.pessoaExcluir)
             }
+            })
+            
+        },
+        cancelar(){
+            this.dialogExcluir = false
+            this.pessoaExcluir = null
+            this.posicaoExcluir = null
         },
         testandoSave(){
             console.log(this.selected)
