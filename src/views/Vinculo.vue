@@ -119,15 +119,9 @@ export default {
             this.posicaoExcluir = null
         },
         testandoSave(){
-            console.log(this.selected)
             console.log(this.items)
-            if(this.model==0){
-                this.vinculo = 1
-            }else{
-                this.vinculo = 2
-            }
-            VinculoService.verificarLista(this.selected,this.vinculo).then((res)=>{
-                console.log(res)
+            VinculoService.atualizarLista(this.items).then((res)=>{
+                console.log(res.data)
             })
         },
         teste(){

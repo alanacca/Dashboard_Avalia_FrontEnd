@@ -16,6 +16,10 @@ function verificarLista(pessoas, idVinculo){
     return DashBoardAxios.post('/pessoasVinculo/verificar/'+idVinculo,pessoas)
 }
 
+function atualizarLista(pessoas){
+    return DashBoardAxios.patch('/pessoas/',pessoas)
+}
+
 function excluir(fkPessoa){
     return DashBoardAxios.delete('/pessoasVinculo/deletar/'+fkPessoa)
 }
@@ -24,4 +28,4 @@ function verifExist(fkPessoa){
     return DashBoardAxios.get('pessoasVinculo/verificarExist/'+fkPessoa)
 }
 
-export {findAll, findSpecific, findByVinculo, verificarLista, excluir,verifExist}
+export {findAll, findSpecific, findByVinculo, verificarLista, excluir,verifExist,atualizarLista}

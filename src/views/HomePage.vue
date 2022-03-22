@@ -65,8 +65,10 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
             },
             pesquisar(){
                 this.loading = true
+                console.log(this.pessoaPesquisa.idPessoa)
                 HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
                 .then((res)=>{
+                    console.log(this.pessoaPesquisa.idPessoa)
                     this.loading = false
                     console.log(res.data)
                     if(res.data.fkPlataforma.sigla=="L"){

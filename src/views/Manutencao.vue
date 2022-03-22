@@ -123,9 +123,9 @@ import * as ManutencaoService from "@/services/ManutencaoService.js"
                 items: [],
                 plataformapessoa: {
                     id: null,
-                    fkPessoa: {id: null, nomeCompleto: null},
+                    fkPessoa: {id: null, nomeCompleto: null,mestrado: false, doutorado: false},
                     fkPlataforma: null,
-                    idPlataforma: null
+                    idPlataforma: null,
                 }
             }
         },

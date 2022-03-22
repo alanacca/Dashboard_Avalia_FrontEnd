@@ -218,7 +218,9 @@ export default {
         }
     },
     mounted(){
+        console.log(this.idCurriculo)
         DashBoardService.listCapitulos(this.idCurriculo,0).then((res)=>{
+            console.log(this.idCurriculo)
             // console.log(res.data)
             this.pageCapitulos = res.data
         })
