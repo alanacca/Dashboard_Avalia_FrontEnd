@@ -3,7 +3,7 @@
         <div style="display: flex;justify-content: center;margin-bottom: 40px">
             <h2>Vinculação</h2>
         </div>
-        <v-data-table :headers="headers" :items="items">
+        <v-data-table :headers="headers" :items="items" class="item-table">
             <template v-slot:[`item.mestrado`]="{ item }">
                 <v-simple-checkbox v-model="item.mestrado" :ripple="false"></v-simple-checkbox>
             </template>
@@ -47,13 +47,13 @@ export default {
       doutorado: false,
       headers: [
       {
-        text: "Nome Professor",
+        text: "NOME PROFESSOR",
         align: "start",
         sortable: false,
         value: "nomeCompleto",
       },
-      { text: "Mestrado", value: "mestrado" },
-      { text: "Doutorado", value: "doutorado" },
+      { text: "MESTRADO", value: "mestrado" },
+      { text: "DOUTORADO", value: "doutorado" },
     ],
        } 
     },
@@ -166,6 +166,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scope lang="scss">
+
+.v-data-table>.v-data-table__wrapper>table>tbody>tr>td {
+
+    font-size: 20px !important
+}
+
+.v-data-table>.v-data-table__wrapper>table>thead>tr>th {
+    font-size: 15px !important;
+}
+
 
 </style>
