@@ -4,6 +4,7 @@ import HomePage from '../views/HomePage.vue'
 import Manutencao from '../views/Manutencao.vue'
 import DashBoard from '../views/DashBoard.vue'
 import Vinculo from '../views/Vinculo.vue'
+import calMestrado from '../views/calculoMestrado.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,12 @@ const routes = [
         path: '/vinculo',
         name: 'Vinculo',
         component: Vinculo,
+        props: true
+    },
+    {
+        path: '/calculoMestrado',
+        name: 'Calculo Mestrado',
+        component: calMestrado,
         props: true
     }
 ]

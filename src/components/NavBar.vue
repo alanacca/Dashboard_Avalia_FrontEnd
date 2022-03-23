@@ -18,6 +18,9 @@
             <v-list-item>
               <v-btn text @click="vinculo()">Adicionar Vínculo</v-btn>
             </v-list-item>
+            <v-list-item>
+              <v-btn text @click="mestrado()">Calculo Mestrado</v-btn>
+            </v-list-item>
           </v-list>
         </v-menu>
     </v-toolbar>
@@ -34,6 +37,9 @@ export default {
         
     },
     methods: {
+        mestrado(){
+          if(this.$router.currentRoute.path !== '/calculoMestrado') this.$router.push("/calculoMestrado")
+        },
         vinculo(){
           if(this.$router.currentRoute.path !== '/vinculo') this.$router.push("/vinculo")
         },

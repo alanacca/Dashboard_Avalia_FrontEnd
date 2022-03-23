@@ -32,7 +32,6 @@ export default {
             itemsPerPage: 10,
            dialogExcluir: false,
            model: '1',
-           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
            vinculo: 1,
            items: [],
            selec: [],
@@ -57,109 +56,45 @@ export default {
     ],
        } 
     },
-    computed:{
-        allSelected () {
-            return this.selected.length === this.items.length
-        },
-        categories () {
-            const search = this.search.toLowerCase()
-            if (!search) return this.items
-                return this.items.filter(item => {
-                    const text = item.fkPessoa.nomeCompleto.toLowerCase()
-                    return text.indexOf(search) > -1
-            })
-        },     
-        selections () {
-            const selections = []
-            for (const selection of this.selected) {
-                selections.push(selection)
-            }
-            return selections
-        },   
+    // computed:{
+    //     allSelected () {
+    //         return this.selected.length === this.items.length
+    //     },
+    //     categories () {
+    //         const search = this.search.toLowerCase()
+    //         if (!search) return this.items
+    //             return this.items.filter(item => {
+    //                 const text = item.fkPessoa.nomeCompleto.toLowerCase()
+    //                 return text.indexOf(search) > -1
+    //         })
+    //     },     
+    //     selections () {
+    //         const selections = []
+    //         for (const selection of this.selected) {
+    //             selections.push(selection)
+    //         }
+    //         return selections
+    //     },   
 
-    },
-    watch: {
-        selected () {
-            this.search = ''
-        },
-    },
+    // },
+    // watch: {
+    //     selected () {
+    //         this.search = ''
+    //     },
+    // },
     methods: {
-        testa(i, selection){
-            this.dialogExcluir = true
-            this.pessoaExcluir = selection
-            this.posicaoExcluir = i
-            console.log(i)
-            console.log(selection)
-        },
-        confirmarSucesso(){
-            VinculoService.verifExist(this.pessoaExcluir.fkPessoa.idPessoa).then((res)=>{
-                console.log(res.data)
-                if(res.data){
-                    this.dialogExcluir = false
-                    this.selected.splice(this.posicaoExcluir,1)
-                    VinculoService.excluir(this.pessoaExcluir.fkPessoa.idPessoa).then(()=>{
-                        if(!this.items.includes(this.pessoaExcluir)){
-                            this.items.push(this.pessoaExcluir)
-                        }
-                    })
-                }else{
-                    this.dialogExcluir = false
-                    this.selected.splice(this.posicaoExcluir,1)
-                    if(!this.items.includes(this.pessoaExcluir)){
-                        this.items.push(this.pessoaExcluir)
-                    }
-                }
-            })
-            
-            
-        },
-        cancelar(){
-            this.dialogExcluir = false
-            this.pessoaExcluir = null
-            this.posicaoExcluir = null
-        },
         testandoSave(){
             console.log(this.items)
             VinculoService.atualizarLista(this.items).then((res)=>{
                 console.log(res.data)
             })
         },
-        teste(){
-            if(this.model==0){
-                this.vinculo = 1
-            }else{
-                this.vinculo = 2
-            }
-            VinculoService.findSpecific(this.vinculo).then((res)=>{
-                console.log(res.data)
-                this.items = res.data
-            })
-            VinculoService.findByVinculo(this.vinculo).then((res)=>{
-                this.selected = res.data
-            })
-        },
-      next () {
-        this.loading = true
-        setTimeout(() => {
-          this.search = ''
-          this.selected = []
-          this.loading = false
-        }, 2000)
-      },
     },
     beforeMount(){
         ManutencaoService.findAll().then((res)=>{
             console.log(res.data)
             this.items = res.data
         })
-        // VinculoService.findSpecific(this.vinculo).then((res)=>{
-        //     console.log(res)
-        //     this.items = res.data
-        // })
-
-        // VinculoService.findByVinculo(this.vinculo).then((res)=>{
-        //     this.selected = res.data
-        // })
         
         
     }
