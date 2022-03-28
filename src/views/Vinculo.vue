@@ -16,6 +16,28 @@
                     Salvar
                 </v-btn>
             </v-card-actions>
+            <v-dialog
+                v-model="dialogSucesso"
+                max-width="290"
+            >
+    
+        <v-card>
+            <v-card-title class="text-h5">
+            Sucesso
+            </v-card-title>
+            <v-card-text>Lista Atualizada com Sucesso</v-card-text>
+            <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                color="primary"
+                text
+                @click="confirmarSucesso"
+            >
+                Ok
+            </v-btn>
+            </v-card-actions>
+        </v-card>
+        </v-dialog>
     </v-app>
 </template>
 
@@ -27,6 +49,7 @@ import * as ManutencaoService from '../services/ManutencaoService'
 export default {
     data() {
        return {
+           dialogSucesso: false,
            page: 1,
             pageCount: 0,
             itemsPerPage: 10,
@@ -56,43 +79,21 @@ export default {
     ],
        } 
     },
-    // computed:{
-    //     allSelected () {
-    //         return this.selected.length === this.items.length
-    //     },
-    //     categories () {
-    //         const search = this.search.toLowerCase()
-    //         if (!search) return this.items
-    //             return this.items.filter(item => {
-    //                 const text = item.fkPessoa.nomeCompleto.toLowerCase()
-    //                 return text.indexOf(search) > -1
-    //         })
-    //     },     
-    //     selections () {
-    //         const selections = []
-    //         for (const selection of this.selected) {
-    //             selections.push(selection)
-    //         }
-    //         return selections
-    //     },   
-
-    // },
-    // watch: {
-    //     selected () {
-    //         this.search = ''
-    //     },
-    // },
     methods: {
+        confirmarSucesso(){
+                this.dialogSucesso = false
+        },
         testandoSave(){
             console.log(this.items)
-            VinculoService.atualizarLista(this.items).then((res)=>{
-                console.log(res.data)
+            VinculoService.atualizarLista(this.items).then(()=>{
+                // console.log(res.data)
+                this.dialogSucesso = true
             })
         },
     },
     beforeMount(){
         ManutencaoService.findAll().then((res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             this.items = res.data
         })
         
