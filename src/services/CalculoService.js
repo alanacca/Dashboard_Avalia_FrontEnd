@@ -4,4 +4,10 @@ function calculoIndices(ano_inicio, ano_final){
     return DashBoardAxios.get("/curriculo/estrato/"+ano_inicio+"/"+ano_final);
 }
 
-export{calculoIndices}
+function calculoIndicesPPGCC(ano_inicio, ano_final){
+    return DashBoardAxios.get("/curriculo/estrato_PPGCC/"+ano_inicio+"/"+ano_final);
+}
+
+
+
+export{calculoIndices,calculoIndicesPPGCC}
