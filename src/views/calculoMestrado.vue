@@ -196,12 +196,19 @@ import {mdbBarChart} from 'mdbvue'
     },
     methods:{
       calcularIndices(){
+        this.barChartData.labels = []
+        this.barChartData.datasets[0].data = []
+        this.barChartData.datasets[1].data = []
+        this.barChartData.datasets[2].data = []
         CalculoService.calculoIndices(this.anoInicio,this.anoFinal).then((res)=>{
           this.items = res.data
           this.items.forEach(element =>{
             this.barChartData.labels.push(element.nomeCompleto)
-            this.barChartData.datasets[0].data.push(element.iRestrito)
-            console.log(this.barChartData)
+            this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+            // console.log(element.iRestrito)
+            this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+            this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+            // console.log(this.barChartData)
           })
           this.mostrarTabela = true
         })
