@@ -21,6 +21,9 @@
             <v-list-item>
               <v-btn text @click="mestrado()">Calculo Mestrado</v-btn>
             </v-list-item>
+            <v-list-item>
+              <v-btn text @click="doutorado()">Calculo Doutorado</v-btn>
+            </v-list-item>
           </v-list>
         </v-menu>
     </v-toolbar>
@@ -37,6 +40,9 @@ export default {
         
     },
     methods: {
+        doutorado(){
+          if(this.$router.currentRoute.path !== '/calculoDoutorado') this.$router.push("/calculoDoutorado")
+        },
         mestrado(){
           if(this.$router.currentRoute.path !== '/calculoMestrado') this.$router.push("/calculoMestrado")
         },

@@ -5,6 +5,8 @@ import Manutencao from '../views/Manutencao.vue'
 import DashBoard from '../views/DashBoard.vue'
 import Vinculo from '../views/Vinculo.vue'
 import calMestrado from '../views/calculoMestrado.vue'
+import calDoutorado from '../views/calculoDoutorado.vue'
+
 
 Vue.use(VueRouter)
 
@@ -35,6 +37,12 @@ const routes = [
         path: '/calculoMestrado',
         name: 'Calculo Mestrado',
         component: calMestrado,
+        props: true
+    },
+    {
+        path: '/calculoDoutorado',
+        name: 'Calculo Doutorado',
+        component: calDoutorado,
         props: true
     }
 ]
