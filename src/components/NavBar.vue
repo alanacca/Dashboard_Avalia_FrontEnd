@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="fonte">
     <v-toolbar>
         <v-spacer></v-spacer>
         <v-btn text @click="home">
@@ -11,7 +11,7 @@
               <span>Ações</span>
             </v-btn>
           </template>
-          <v-list>
+          <v-list class="fonte">
             <v-list-item>
               <v-btn text @click="manutencao()">Adicionar Docente</v-btn>
             </v-list-item>
@@ -58,3 +58,11 @@ export default {
     }
 }
 </script>
+
+<style>
+
+.fonte{
+  font-family:'Times New Roman', Times, serif;
+}
+
+</style>

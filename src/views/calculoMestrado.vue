@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="fonte">
     <v-list three-line>
       <h2 style="justify-content: center; display: flex; align-items: center; margin-bottom: 20px">Calculo de Indices do Mestrado</h2>
       <div>
@@ -12,7 +12,7 @@
               solo
               @change="mostrarTabela = false"
             ></v-autocomplete>
-          </v-col>
+          </v-col> 
           <v-col cols="12" md="2">
             <v-autocomplete
               :items="years"
@@ -62,7 +62,7 @@
               </div>
             </v-card>
             <v-card>
-              <h3 style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do PPGCC dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
+              <h3 style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do PPGCC dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
               <v-data-table
                 
                 :headers="titulo"
@@ -226,10 +226,3 @@ import {mdbBarChart} from 'mdbvue'
     },
   }
 </script>
-
-<style scoped>
-
- .v-data-table>div>table>thead {
-    color: blue !important
-  }
-</style>

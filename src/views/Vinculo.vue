@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app class="fonte">
         <div style="display: flex;justify-content: center;margin-bottom: 40px">
             <h2>Vinculação</h2>
         </div>

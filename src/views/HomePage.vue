@@ -1,15 +1,14 @@
 <template>
-    <div>
-        <v-app>
+        <v-app class="fonte">
             <v-row style="display: flex; justify-content: center;margin-top: 120px; margin-bottom: 60px">
                 <v-col cols="12" md="6">
                     <v-row>
                         <v-img
-                            
-                            src="@/assets/D.png"
+                            src="@/assets/D (2).png"
                         ></v-img>
                     </v-row>
                     <v-row style="justify-content: center; display: flex;margin-top:40px">
+                        <v-col cols="12" md="6">
                                 <v-autocomplete
                                     label="Digite o nome"
                                     :items="cadastrados"
@@ -18,7 +17,8 @@
                                     solo
                                     v-model="pessoaPesquisa"
                                 ></v-autocomplete>
-
+                        </v-col>
+                        <v-col cols="12" md="6">
                                     <v-autocomplete
                                     :items="items"
                                     label="Plataforma"
@@ -28,6 +28,7 @@
                                     style="margin-left: 10px;"
                                     v-model="platIdPesquisa"
                                     ></v-autocomplete>
+                        </v-col>
                                     
                     </v-row>
                     <v-row style="justify-content: center; display: flex; marign-right=5px">
@@ -43,8 +44,6 @@
                 </v-col>
             </v-row>
         </v-app>
-
-    </div>
 </template>
 
 <script>
@@ -64,17 +63,21 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 console.log(this.pessoaPesquisa)
             },
             pesquisar(){
-                this.loading = true
-                console.log(this.pessoaPesquisa.idPessoa)
-                HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
-                .then((res)=>{
+                if(this.pessoaPesquisa!=null && this.platIdPesquisa!=null){
+                    this.loading = true
                     console.log(this.pessoaPesquisa.idPessoa)
-                    this.loading = false
-                    console.log(res.data)
-                    if(res.data.fkPlataforma.sigla=="L"){
-                        this.$router.push("/dashboard/"+res.data.idPlataforma+"/"+res.data.fkPlataforma.descricao)
-                    }
-                })
+                    HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
+                    .then((res)=>{
+                        console.log(this.pessoaPesquisa.idPessoa)
+                        this.loading = false
+                        console.log(res.data)
+                        if(res.data.fkPlataforma.sigla=="L"){
+                            this.$router.push("/dashboard/"+res.data.idPlataforma+"/"+res.data.fkPlataforma.descricao)
+                        }
+                    })
+                }else{
+                    alert("É necessário preencher os campos")
+                }
             }
         },
         beforeMount(){
@@ -92,5 +95,8 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
 </script>
 
 <style>
-    
+
+.fonte{
+  font-family:'Times New Roman', Times, serif;
+}
 </style>
