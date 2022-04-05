@@ -5,22 +5,24 @@
       <div>
         <v-row style="justify-content: center; display: flex; align-items: center">
           <v-col cols="12" md="2">
-            <v-select
+            <v-autocomplete
               :items="years"
               label="Ano Inicio"
               v-model="anoInicio"
+              solo
               @change="mostrarTabela = false"
-            ></v-select>
+            ></v-autocomplete>
           </v-col>
           <v-col cols="12" md="2">
-            <v-select
+            <v-autocomplete
               :items="years"
               label="Ano Final"
               v-model="anoFinal"
+              solo
               @change="mostrarTabela = false"
-            ></v-select>
+            ></v-autocomplete>
           </v-col>
-          <v-col cols="12" md="1">
+          <v-col cols="12" md="1" style="margin-bottom: 30px">
             <v-btn color="primary"
               @click="calcularIndices()"
               :disabled="habilitar"

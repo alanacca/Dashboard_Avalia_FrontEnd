@@ -5,22 +5,24 @@
       <div>
         <v-row style="justify-content: center; display: flex; align-items: center">
           <v-col cols="12" md="2">
-            <v-select
+            <v-autocomplete
               :items="years"
               label="Ano Inicio"
               v-model="anoInicio"
+              solo
               @change="mostrarTabela = false"
-            ></v-select>
+            ></v-autocomplete>
           </v-col>
           <v-col cols="12" md="2">
-            <v-select
+            <v-autocomplete
               :items="years"
               label="Ano Final"
               v-model="anoFinal"
+              solo
               @change="mostrarTabela = false"
-            ></v-select>
+            ></v-autocomplete>
           </v-col>
-          <v-col cols="12" md="1">
+          <v-col cols="12" md="1" style="margin-bottom: 30px">
             <v-btn color="primary"
               @click="calcularIndices()"
               :disabled="habilitar"
@@ -43,7 +45,7 @@
           <v-tab-item :key="1" :value="`tab-1`">
             <v-card>
               <h3 style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
-              <v-data-table
+              <v-data-table                
                 :headers="headers"
                 :items="items"
                 :page.sync="page"
@@ -62,11 +64,12 @@
             <v-card>
               <h3 style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do PPGCC dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
               <v-data-table
+                
                 :headers="titulo"
                 :items="ppgcc"
                 :items-per-page="5"
                 hide-default-footer
-                class="elevation-3"
+                class="elevation-4"
               ></v-data-table>
             </v-card>
           </v-tab-item>
@@ -223,3 +226,10 @@ import {mdbBarChart} from 'mdbvue'
     },
   }
 </script>
+
+<style scoped>
+
+ .v-data-table>div>table>thead {
+    color: blue !important
+  }
+</style>

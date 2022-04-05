@@ -5,10 +5,8 @@
                 <v-col cols="12" md="6">
                     <v-row>
                         <v-img
-                            style="margin: auto;justify-content: center;display: grid;align-items: center"
-                            max-height="150"
-                            max-width="290"
-                            src="@/assets/DashBoard__1 (1).png"
+                            
+                            src="@/assets/D.png"
                         ></v-img>
                     </v-row>
                     <v-row style="justify-content: center; display: flex;margin-top:40px">
@@ -17,6 +15,7 @@
                                     :items="cadastrados"
                                     item-text="nomeCompleto"
                                     return-object
+                                    solo
                                     v-model="pessoaPesquisa"
                                 ></v-autocomplete>
 
@@ -25,6 +24,7 @@
                                     label="Plataforma"
                                     item-text="descricao"
                                     item-value="id"
+                                    solo
                                     style="margin-left: 10px;"
                                     v-model="platIdPesquisa"
                                     ></v-autocomplete>

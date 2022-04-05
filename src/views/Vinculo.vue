@@ -3,7 +3,15 @@
         <div style="display: flex;justify-content: center;margin-bottom: 40px">
             <h2>Vinculação</h2>
         </div>
-        <v-data-table :headers="headers" :items="items" class="item-table">
+        <v-data-table 
+            :page.sync="page"
+            :items-per-page="itemsPerPage"
+            hide-default-footer
+            @page-count="pageCount = $event"
+            :headers="headers" 
+            :items="items" 
+            class="item-table"
+        >
             <template v-slot:[`item.mestrado`]="{ item }">
                 <v-simple-checkbox v-model="item.mestrado" :ripple="false"></v-simple-checkbox>
             </template>
@@ -11,6 +19,12 @@
                 <v-simple-checkbox v-model="item.doutorado" :ripple="false"></v-simple-checkbox>
             </template>
             </v-data-table>
+            <div class="text-center pt-2">
+                <v-pagination
+                    v-model="page"
+                    :length="pageCount"
+                ></v-pagination>
+            </div>
             <v-card-actions style="justify-content: center;align-items: center;display:grid;margin-bottom: 10px">
                 <v-btn color="primary" @click="testandoSave()">
                     Salvar
@@ -49,15 +63,15 @@ import * as ManutencaoService from '../services/ManutencaoService'
 export default {
     data() {
        return {
-           dialogSucesso: false,
-           page: 1,
+            dialogSucesso: false,
+            page: 1,
             pageCount: 0,
-            itemsPerPage: 10,
-           dialogExcluir: false,
-           model: '1',
-           vinculo: 1,
-           items: [],
-           selec: [],
+            itemsPerPage: 5,
+            dialogExcluir: false,
+            model: '1',
+            vinculo: 1,
+            items: [],
+            selec: [],
       loading: false,
       search: '',
       pessoaExcluir: null,
