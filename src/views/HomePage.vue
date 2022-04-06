@@ -1,10 +1,12 @@
 <template>
-        <v-app class="fonte">
+        <v-app>
             <v-row style="display: flex; justify-content: center;margin-top: 120px; margin-bottom: 60px">
                 <v-col cols="12" md="6">
                     <v-row>
-                        <v-img
-                            src="@/assets/D (2).png"
+                        <v-img style="margin: auto;justify-content: center;display: grid;align-items: center"
+                            max-height="150"
+                            max-width="290"
+                            src="@/assets/D_1.png"
                         ></v-img>
                     </v-row>
                     <v-row style="justify-content: center; display: flex;margin-top:40px">
@@ -96,7 +98,4 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
 
 <style>
 
-.fonte{
-  font-family:'Times New Roman', Times, serif;
-}
 </style>

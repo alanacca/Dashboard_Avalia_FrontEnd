@@ -1,5 +1,5 @@
 <template>
-    <v-app class="fonte">
+    <v-app>
         <div style="display: flex;justify-content: center;margin-bottom: 40px">
             <h2>Manutenção</h2>
         </div>

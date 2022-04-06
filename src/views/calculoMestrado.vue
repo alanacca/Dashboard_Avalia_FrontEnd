@@ -1,5 +1,5 @@
 <template>
-  <v-app class="fonte">
+  <v-app>
     <v-list three-line>
       <h2 style="justify-content: center; display: flex; align-items: center; margin-bottom: 20px">Calculo de Indices do Mestrado</h2>
       <div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="dashboard-editor-container fonte">
+    <div class="dashboard-editor-container">
 <!-- 
         <github-corner class="github-corner" />
 
