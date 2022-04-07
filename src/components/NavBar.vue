@@ -1,5 +1,5 @@
 <template>
-  <nav class="fonte">
+  <nav>
     <v-toolbar>
         <v-spacer></v-spacer>
         <v-btn text @click="home">
@@ -60,9 +60,5 @@ export default {
 </script>
 
 <style>
-
-.fonte{
-  font-family:'Times New Roman', Times, serif;
-}
 
 </style>
