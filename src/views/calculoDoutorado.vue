@@ -171,7 +171,7 @@ import {mdbBarChart} from 'mdbvue'
         ],
         titulo: [
           { text: 'iRestrito', value: 'iRestrito_DCC' },
-        //   { text: 'iNao Restrito', value: 'iNao_Restrito_PPGCC' },
+          { text: 'iNao Restrito', value: 'iNao_Restrito_DCC' },
           { text: 'iGeral', value: 'iGeral_DCC' },
         ],
         ppgcc: [],
