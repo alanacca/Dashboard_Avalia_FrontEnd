@@ -4,9 +4,9 @@
                 <v-col cols="12" md="6">
                     <v-row>
                         <v-img style="margin: auto;justify-content: center;display: grid;align-items: center"
-                            max-height="150"
-                            max-width="290"
-                            src="@/assets/D_1.png"
+                            max-height="350"
+                            max-width="350"
+                            src="@/assets/logo_5.png"
                         ></v-img>
                     </v-row>
                     <v-row style="justify-content: center; display: flex;margin-top:40px">

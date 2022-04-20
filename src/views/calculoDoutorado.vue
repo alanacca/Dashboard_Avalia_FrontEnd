@@ -74,7 +74,12 @@
           </v-tab-item>
           <v-tab-item :key="2" :value="`tab-2`">
               <div style="display: block">
+                <h3 style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
                 <mdb-bar-chart :data="barChartData" :options="barChartOptions" :height="500"/>
+              </div>
+              <div style="display: block">
+                <h3 style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do DCCMAPI dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
+                <mdb-bar-chart :data="doutoradoData" :options="doutoradoOptions" :height="500"/>
               </div>
           </v-tab-item>
         </v-tabs-items>
@@ -121,6 +126,50 @@ import {mdbBarChart} from 'mdbvue'
         ]
       },
       barChartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [{
+            barPercentage: 1,
+            gridLines: {
+              display: true,
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: true,
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      },
+
+      doutoradoData: {
+        labels: [],
+        datasets: [
+          {
+            label: 'iRegistro',
+            data: [],
+            backgroundColor: 'rgba(245, 74, 85, 0.5)',
+            borderWidth: 1
+          }, {
+            label: 'iNao Resgistro',
+            data: [],
+            backgroundColor: 'rgba(90, 173, 246, 0.5)',
+            borderWidth: 1
+          }, {
+            label: 'iGeral',
+            data: [],
+            backgroundColor: 'rgba(245, 192, 50, 0.5)',
+            borderWidth: 1
+          }
+        ]
+      },
+      doutoradoOptions: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -198,12 +247,10 @@ import {mdbBarChart} from 'mdbvue'
     },
     methods:{
       calcularIndices(){
-        this.barChartData.labels = []
-        this.barChartData.datasets[0].data = []
-        this.barChartData.datasets[1].data = []
-        this.barChartData.datasets[2].data = []
+        
         CalculoService.calculoIndicesDoutorado(this.anoInicio,this.anoFinal).then((res)=>{
           this.items = res.data
+          console.log(this.items)
           this.items.forEach(element =>{
             this.barChartData.labels.push(element.nomeCompleto)
             this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
@@ -216,8 +263,22 @@ import {mdbBarChart} from 'mdbvue'
         })
         CalculoService.calculoIndicesDCC(this.anoInicio,this.anoFinal).then((res)=>{
           this.ppgcc = res.data
+          this.doutoradoData.datasets[0].data.push(parseFloat(res.data[0].iRestrito_DCC.replace(",",".")))
+          this.doutoradoData.datasets[1].data.push(parseFloat(res.data[0].iNao_Restrito_DCC.replace(",",".")))
+          this.doutoradoData.datasets[2].data.push(parseFloat(res.data[0].iGeral_DCC.replace(",",".")))
           console.log(res.data)
         })
+      },
+
+      limparDados(){
+        this.barChartData.labels = []
+        this.barChartData.datasets[0].data = []
+        this.barChartData.datasets[1].data = []
+        this.barChartData.datasets[2].data = []
+        this.doutoradoData.labels = []
+        this.doutoradoData.datasets[0].data = []
+        this.doutoradoData.datasets[1].data = []
+        this.doutoradoData.datasets[2].data = []
       },
         teste(){
             console.log(this.selected)

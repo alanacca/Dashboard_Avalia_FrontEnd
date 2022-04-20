@@ -1,14 +1,13 @@
 <template>
-  <nav>
-    <v-toolbar>
+  <nav class="navbar">
         <v-spacer></v-spacer>
         <v-btn text @click="home">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-home icon" ></i>
         </v-btn>
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn text v-bind="attrs" v-on="on">
-              <span>Ações</span>
+              <span class="icon">Ações</span>
             </v-btn>
           </template>
           <v-list class="fonte">
@@ -26,7 +25,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-    </v-toolbar>
   </nav>
 </template>
 
@@ -60,5 +58,14 @@ export default {
 </script>
 
 <style>
+
+.navbar{
+  background-color: #274AAD !important;
+  color: #274AAD !important;
+}
+
+.icon{
+  color: white !important;
+}
 
 </style>

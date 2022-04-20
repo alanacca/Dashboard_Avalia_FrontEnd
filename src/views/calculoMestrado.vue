@@ -75,7 +75,12 @@
           </v-tab-item>
           <v-tab-item :key="2" :value="`tab-2`">
               <div style="display: block">
+                <h3 style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
                 <mdb-bar-chart :data="barChartData" :options="barChartOptions" :height="500"/>
+              </div>
+              <div style="display: block">
+                <h3 style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do PPGCC dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
+                <mdb-bar-chart :data="mestradoData" :options="mestradoOptions" :height="500"/>
               </div>
           </v-tab-item>
         </v-tabs-items>
@@ -105,7 +110,7 @@ import {mdbBarChart} from 'mdbvue'
         datasets: [
           {
             label: 'iRegistro',
-            data: [20],
+            data: [],
             backgroundColor: 'rgba(245, 74, 85, 0.5)',
             borderWidth: 1
           }, {
@@ -122,6 +127,50 @@ import {mdbBarChart} from 'mdbvue'
         ]
       },
       barChartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [{
+            barPercentage: 1,
+            gridLines: {
+              display: true,
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: true,
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      },
+
+      mestradoData: {
+        labels: [],
+        datasets: [
+          {
+            label: 'iRegistro',
+            data: [],
+            backgroundColor: 'rgba(245, 74, 85, 0.5)',
+            borderWidth: 1
+          }, {
+            label: 'iNao Resgistro',
+            data: [],
+            backgroundColor: 'rgba(90, 173, 246, 0.5)',
+            borderWidth: 1
+          }, {
+            label: 'iGeral',
+            data: [],
+            backgroundColor: 'rgba(245, 192, 50, 0.5)',
+            borderWidth: 1
+          }
+        ]
+      },
+      mestradoOptions: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -199,10 +248,7 @@ import {mdbBarChart} from 'mdbvue'
     },
     methods:{
       calcularIndices(){
-        this.barChartData.labels = []
-        this.barChartData.datasets[0].data = []
-        this.barChartData.datasets[1].data = []
-        this.barChartData.datasets[2].data = []
+        this.limparCampos();
         CalculoService.calculoIndices(this.anoInicio,this.anoFinal).then((res)=>{
           this.items = res.data
           this.items.forEach(element =>{
@@ -217,8 +263,21 @@ import {mdbBarChart} from 'mdbvue'
         })
         CalculoService.calculoIndicesPPGCC(this.anoInicio,this.anoFinal).then((res)=>{
           this.ppgcc = res.data
-          console.log(res.data)
+          this.mestradoData.datasets[0].data.push(parseFloat(res.data[0].iRestrito_PPGCC.replace(",",".")))
+          this.mestradoData.datasets[1].data.push(parseFloat(res.data[0].iNao_Restrito_PPGCC.replace(",",".")))
+          this.mestradoData.datasets[2].data.push(parseFloat(res.data[0].iGeral_PPGCC.replace(",",".")))
+          // console.log(res.data[0].iGeral_PPGCC)
         })
+      },
+      limparCampos(){
+        this.barChartData.labels = []
+        this.barChartData.datasets[0].data = []
+        this.barChartData.datasets[1].data = []
+        this.barChartData.datasets[2].data = []
+        this.mestradoData.labels = []
+        this.mestradoData.datasets[0].data = []
+        this.mestradoData.datasets[1].data = []
+        this.mestradoData.datasets[2].data = []
       },
         teste(){
             console.log(this.selected)
