@@ -44,7 +44,7 @@
         <v-tabs-items v-model="model">
           <v-tab-item :key="1" :value="`tab-1`">
             <v-card>
-              <h3 style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
+              <h3 v-tooltip="'Calculo dos indices de forma individual dos professores do doutorado'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
               <v-data-table
                 :headers="headers"
                 :items="items"
@@ -62,7 +62,8 @@
               </div>
             </v-card>
             <v-card>
-              <h3 style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do DCCMAPI dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
+              <h3 v-tooltip="'Calculo dos indices do programa de doutorado da UFMA'" style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">
+              Calculo de Indices do DCCMAPI dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
               <v-data-table
                 :headers="titulo"
                 :items="ppgcc"
@@ -74,11 +75,11 @@
           </v-tab-item>
           <v-tab-item :key="2" :value="`tab-2`">
               <div style="display: block">
-                <h3 style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
+                <h3 v-tooltip="'Calculo dos indices de forma individual dos professores do programa de doutorado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
                 <mdb-bar-chart :data="barChartData" :options="barChartOptions" :height="500"/>
               </div>
               <div style="display: block">
-                <h3 style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do DCCMAPI dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
+                <h3 v-tooltip="'Calculo dos indices do programa de doutorado da UFMA'" style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do DCCMAPI dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
                 <mdb-bar-chart :data="doutoradoData" :options="doutoradoOptions" :height="500"/>
               </div>
           </v-tab-item>
@@ -286,3 +287,7 @@ import {mdbBarChart} from 'mdbvue'
     },
   }
 </script>
+
+<style lang="sass">
+  
+</style>
