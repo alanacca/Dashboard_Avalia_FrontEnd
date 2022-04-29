@@ -44,6 +44,24 @@
         <v-tabs-items v-model="model">
           <v-tab-item :key="1" :value="`tab-1`">
             <v-card>
+              <h3 v-tooltip="'Calculo dos indices de forma individual 2 Forma dos professores do doutorado'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores 2 Forma</h3>
+              <v-data-table
+                :headers="headers"
+                :items="items2Forma"
+                :page.sync="page"
+                :items-per-page="itemsPerPage"
+                hide-default-footer
+                @page-count="pageCount = $event"
+                  
+              ></v-data-table>
+              <div class="text-center pt-2">
+                <v-pagination
+                  v-model="page"
+                  :length="pageCount"
+                ></v-pagination>
+              </div>
+            </v-card>
+            <v-card>
               <h3 v-tooltip="'Calculo dos indices de forma individual dos professores do doutorado'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
               <v-data-table
                 :headers="headers"
@@ -226,6 +244,7 @@ import {mdbBarChart} from 'mdbvue'
         ],
         ppgcc: [],
         items: [],
+        items2Forma: [],
         mostrarTabela: false,
         anoInicio: null,
         anoFinal: null,
@@ -248,6 +267,17 @@ import {mdbBarChart} from 'mdbvue'
     },
     methods:{
       calcularIndices(){
+        CalculoService.calculoIndicesDoutorado2Forma(this.anoInicio,this.anoFinal).then(res =>{
+          this.items2Forma = res.data
+          // this.items2Forma.forEach(element =>{
+          //   this.barChartData.labels.push(element.nomeCompleto)
+          //   this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+          //   // console.log(element.iRestrito)
+          //   this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+          //   this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+          //   // console.log(this.barChartData)
+          // })
+        })
         
         CalculoService.calculoIndicesDoutorado(this.anoInicio,this.anoFinal).then((res)=>{
           this.items = res.data

@@ -44,6 +44,26 @@
         <v-tabs-items v-model="model">
           <v-tab-item :key="1" :value="`tab-1`">
             <v-card>
+              <h3 v-tooltip="'Calculo dos indices individuais 2 Forma dos professores do programa de mestrado da UFMA'" 
+              style="justify-content: center; display: flex; align-items: center; margin-top: 20px">
+              Calculo de Indices dos Professores 2 Forma</h3>
+              <v-data-table                
+                :headers="headers"
+                :items="items2Forma"
+                :page.sync="page"
+                :items-per-page="itemsPerPage"
+                hide-default-footer
+                @page-count="pageCount = $event"
+                  
+              ></v-data-table>
+              <div class="text-center pt-2">
+                <v-pagination
+                  v-model="page"
+                  :length="pageCount"
+                ></v-pagination>
+              </div>
+            </v-card>
+            <v-card>
               <h3 v-tooltip="'Calculo dos indices individuais dos professores do programa de mestrado da UFMA'" 
               style="justify-content: center; display: flex; align-items: center; margin-top: 20px">
               Calculo de Indices dos Professores</h3>
@@ -228,6 +248,7 @@ import {mdbBarChart} from 'mdbvue'
         ],
         ppgcc: [],
         items: [],
+        items2Forma: [],
         mostrarTabela: false,
         anoInicio: null,
         anoFinal: null,
@@ -251,6 +272,9 @@ import {mdbBarChart} from 'mdbvue'
     methods:{
       calcularIndices(){
         this.limparCampos();
+        CalculoService.calculoIndicesMestrado2Forma(this.anoInicio,this.anoFinal).then((res)=>{
+          this.items2Forma = res.data
+        })
         CalculoService.calculoIndices(this.anoInicio,this.anoFinal).then((res)=>{
           this.items = res.data
           this.items.forEach(element =>{
