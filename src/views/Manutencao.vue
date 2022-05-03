@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <div style="display: flex;justify-content: center;margin-bottom: 40px">
+        <div style="display: flex;justify-content: center;align-items:center;margin-bottom: 20px">
             <h2>Manutenção</h2>
         </div>
         <v-form lazy-validation ref="form">

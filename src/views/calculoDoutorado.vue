@@ -92,6 +92,10 @@
             </v-card>
           </v-tab-item>
           <v-tab-item :key="2" :value="`tab-2`">
+            <div style="display: block">
+                <h3 v-tooltip="'Calculo dos indices de forma individual 2 Forma dos professores do programa de doutorado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores 2 Forma</h3>
+                <mdb-bar-chart :data="barChartData2Forma" :options="barChartOptions2Forma" :height="500"/>
+              </div>
               <div style="display: block">
                 <h3 v-tooltip="'Calculo dos indices de forma individual dos professores do programa de doutorado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
                 <mdb-bar-chart :data="barChartData" :options="barChartOptions" :height="500"/>
@@ -145,6 +149,50 @@ import {mdbBarChart} from 'mdbvue'
         ]
       },
       barChartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [{
+            barPercentage: 1,
+            gridLines: {
+              display: true,
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: true,
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      },
+
+      barChartData2Forma: {
+        labels: [],
+        datasets: [
+          {
+            label: 'iRegistro',
+            data: [],
+            backgroundColor: 'rgba(245, 74, 85, 0.5)',
+            borderWidth: 1
+          }, {
+            label: 'iNao Resgistro',
+            data: [],
+            backgroundColor: 'rgba(90, 173, 246, 0.5)',
+            borderWidth: 1
+          }, {
+            label: 'iGeral',
+            data: [],
+            backgroundColor: 'rgba(245, 192, 50, 0.5)',
+            borderWidth: 1
+          }
+        ]
+      },
+      barChartOptions2Forma: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -269,14 +317,14 @@ import {mdbBarChart} from 'mdbvue'
       calcularIndices(){
         CalculoService.calculoIndicesDoutorado2Forma(this.anoInicio,this.anoFinal).then(res =>{
           this.items2Forma = res.data
-          // this.items2Forma.forEach(element =>{
-          //   this.barChartData.labels.push(element.nomeCompleto)
-          //   this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
-          //   // console.log(element.iRestrito)
-          //   this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
-          //   this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-          //   // console.log(this.barChartData)
-          // })
+          this.items2Forma.forEach(element =>{
+            this.barChartData2Forma.labels.push(element.nomeCompleto)
+            this.barChartData2Forma.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+            // console.log(element.iRestrito)
+            this.barChartData2Forma.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+            this.barChartData2Forma.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+            // console.log(this.barChartData)
+          })
         })
         
         CalculoService.calculoIndicesDoutorado(this.anoInicio,this.anoFinal).then((res)=>{

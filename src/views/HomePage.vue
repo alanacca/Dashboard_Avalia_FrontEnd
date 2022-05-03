@@ -1,15 +1,29 @@
 <template>
-        <v-app>
-            <v-row style="display: flex; justify-content: center;margin-top: 120px; margin-bottom: 60px">
+        <!-- <v-app> -->
+            <v-row style="display: flex;justify-content: center;align-items:center">
                 <v-col cols="12" md="6">
                     <v-row>
                         <v-img style="margin: auto;justify-content: center;display: grid;align-items: center"
-                            max-height="350"
-                            max-width="350"
-                            src="@/assets/logo_5.png"
-                        ></v-img>
+                                max-height="350"
+                                max-width="200"
+                                src="@/assets/ufma_logo.png"
+                            ></v-img>
                     </v-row>
-                    <v-row style="justify-content: center; display: flex;margin-top:40px">
+                    <v-row>
+                        <v-col>
+                            <v-img class="resize" 
+                            style="margin: auto;justify-content: center;display: grid;align-items: center"
+                                src="@/assets/ppgcc_logo.png"
+                            ></v-img>
+                        </v-col>
+                        <v-col>
+                            <v-img class="resize"
+                            style="margin: auto;justify-content: center;display: grid;align-items: center"
+                                src="@/assets/DCCMApi_logo.png"
+                            ></v-img>
+                        </v-col>
+                    </v-row>
+                    <v-row style="justify-content: center; display: flex;">
                         <v-col cols="12" md="6">
                                 <v-autocomplete
                                     label="Digite o nome"
@@ -27,13 +41,12 @@
                                     item-text="descricao"
                                     item-value="id"
                                     solo
-                                    style="margin-left: 10px;"
                                     v-model="platIdPesquisa"
                                     ></v-autocomplete>
                         </v-col>
                                     
                     </v-row>
-                    <v-row style="justify-content: center; display: flex; marign-right=5px">
+                    <v-row style="justify-content: center; display: flex;">
                             <v-btn color="primary" @click="pesquisar()">
                                 Importar
                             </v-btn>
@@ -45,7 +58,7 @@
                     </v-row>
                 </v-col>
             </v-row>
-        </v-app>
+        <!-- </v-app> -->
 </template>
 
 <script>
@@ -98,4 +111,8 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
 
 <style>
 
+.resize{
+    width: 200px;
+    height: 90px;
+}
 </style>
