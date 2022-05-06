@@ -43,7 +43,7 @@
         </v-tabs>
         <v-tabs-items v-model="model">
           <v-tab-item :key="1" :value="`tab-1`">
-            <v-card>
+            <!-- <v-card>
               <h3 v-tooltip="'Calculo dos indices individuais 2 Forma dos professores do programa de mestrado da UFMA'" 
               style="justify-content: center; display: flex; align-items: center; margin-top: 20px">
               Calculo de Indices dos Professores 2 Forma</h3>
@@ -62,11 +62,11 @@
                   :length="pageCount"
                 ></v-pagination>
               </div>
-            </v-card>
+            </v-card> -->
             <v-card>
-              <h3 v-tooltip="'Calculo dos indices individuais dos professores do programa de mestrado da UFMA'" 
+              <h3 v-tooltip="'Calculo Individual de Indices CAPES dos Professores do Mestrado'" 
               style="justify-content: center; display: flex; align-items: center; margin-top: 20px">
-              Calculo de Indices dos Professores</h3>
+              Calculo Individual de Indices CAPES dos Professores nos Anos ({{anoInicio}} - {{anoFinal}})</h3>
               <v-data-table                
                 :headers="headers"
                 :items="items"
@@ -84,7 +84,7 @@
               </div>
             </v-card>
             <v-card>
-              <h3 v-tooltip="'Calculo dos indices do programa de mestrado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices do PPGCC dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
+              <h3 v-tooltip="'Calculo dos Indices CAPES do Programa de Mestrado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo Geral dos Indices CAPES do PPGCC nos Anos ({{anoInicio}} - {{anoFinal}})</h3>
               <v-data-table
                 
                 :headers="titulo"
@@ -96,10 +96,10 @@
             </v-card>
           </v-tab-item>
           <v-tab-item :key="2" :value="`tab-2`">
-            <div style="display: block">
+            <!-- <div style="display: block">
                 <h3 v-tooltip="'Calculo dos indices individuais 2 Forma dos professores do programa de mestrado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores 2 Forma</h3>
                 <mdb-bar-chart :data="barChartData2Forma" :options="barChartOptions2Forma" :height="500"/>
-              </div>
+              </div> -->
               <div style="display: block">
                 <h3 v-tooltip="'Calculo dos indices individuais dos professores do programa de mestrado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
                 <mdb-bar-chart :data="barChartData" :options="barChartOptions" :height="500"/>
@@ -288,6 +288,14 @@ import {mdbBarChart} from 'mdbvue'
           },
           { text: 'iNao Restrito', value: 'iNao_Restrito' },
           { text: 'iGeral', value: 'iGeral' },
+          { text: 'iRestrito(Não Repetido)', 
+            value: 'iRestrito_2_forma',
+            align: 'start',
+            sortable: false,
+          
+          },
+          { text: 'iNao Restrito(Não Repetido)', value: 'iNao_Restrito_2_forma' },
+          { text: 'iGeral(Não Repetido)', value: 'iGeral_2_forma' },
         ],
         titulo: [
           { text: 'iRestrito', value: 'iRestrito_PPGCC' },
@@ -320,26 +328,27 @@ import {mdbBarChart} from 'mdbvue'
     methods:{
       calcularIndices(){
         this.limparCampos();
-        CalculoService.calculoIndicesMestrado2Forma(this.anoInicio,this.anoFinal).then((res)=>{
-          this.items2Forma = res.data
-          this.items2Forma.forEach(element =>{
-            this.barChartData2Forma.labels.push(element.nomeCompleto)
-          this.barChartData2Forma.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
-            // console.log(element.iRestrito)
-            this.barChartData2Forma.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
-            this.barChartData2Forma.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-          })
-        })
+        // CalculoService.calculoIndicesMestrado2Forma(this.anoInicio,this.anoFinal).then((res)=>{
+        //   this.items2Forma = res.data
+        //   this.items2Forma.forEach(element =>{
+        //     this.barChartData2Forma.labels.push(element.nomeCompleto)
+        //   this.barChartData2Forma.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+        //     // console.log(element.iRestrito)
+        //     this.barChartData2Forma.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+        //     this.barChartData2Forma.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+        //   })
+        // })
         CalculoService.calculoIndices(this.anoInicio,this.anoFinal).then((res)=>{
+          console.log(res.data)
           this.items = res.data
-          this.items.forEach(element =>{
-            this.barChartData.labels.push(element.nomeCompleto)
-            this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
-            // console.log(element.iRestrito)
-            this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
-            this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-            // console.log(this.barChartData)
-          })
+          // this.items.forEach(element =>{
+          //   this.barChartData.labels.push(element.nomeCompleto)
+          //   this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+          //   // console.log(element.iRestrito)
+          //   this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+          //   this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+          //   // console.log(this.barChartData)
+          // })
           this.mostrarTabela = true
         })
         CalculoService.calculoIndicesPPGCC(this.anoInicio,this.anoFinal).then((res)=>{

@@ -43,7 +43,7 @@
         </v-tabs>
         <v-tabs-items v-model="model">
           <v-tab-item :key="1" :value="`tab-1`">
-            <v-card>
+            <!-- <v-card>
               <h3 v-tooltip="'Calculo dos indices de forma individual 2 Forma dos professores do doutorado'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores 2 Forma</h3>
               <v-data-table
                 :headers="headers"
@@ -60,9 +60,9 @@
                   :length="pageCount"
                 ></v-pagination>
               </div>
-            </v-card>
+            </v-card> -->
             <v-card>
-              <h3 v-tooltip="'Calculo dos indices de forma individual dos professores do doutorado'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
+              <h3 v-tooltip="'Calculo Individual de Indices CAPES dos Professores do Doutorado'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo Individual de Indices CAPES dos Professores nos Anos ({{anoInicio}} - {{anoFinal}})</h3>
               <v-data-table
                 :headers="headers"
                 :items="items"
@@ -80,8 +80,8 @@
               </div>
             </v-card>
             <v-card>
-              <h3 v-tooltip="'Calculo dos indices do programa de doutorado da UFMA'" style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">
-              Calculo de Indices do DCCMAPI dos Anos ({{anoInicio}} - {{anoFinal}})</h3>
+              <h3 v-tooltip="'Calculo dos Indices CAPES do Programa de Doutorado da UFMA'" style="color: dark;justify-content: center; display: flex; align-items: center; margin-top: 20px">
+              Calculo Geral dos Indices CAPES do DCCMAPI nos Anos ({{anoInicio}} - {{anoFinal}})</h3>
               <v-data-table
                 :headers="titulo"
                 :items="ppgcc"
@@ -92,10 +92,10 @@
             </v-card>
           </v-tab-item>
           <v-tab-item :key="2" :value="`tab-2`">
-            <div style="display: block">
+            <!-- <div style="display: block">
                 <h3 v-tooltip="'Calculo dos indices de forma individual 2 Forma dos professores do programa de doutorado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores 2 Forma</h3>
                 <mdb-bar-chart :data="barChartData2Forma" :options="barChartOptions2Forma" :height="500"/>
-              </div>
+              </div> -->
               <div style="display: block">
                 <h3 v-tooltip="'Calculo dos indices de forma individual dos professores do programa de doutorado da UFMA'" style="justify-content: center; display: flex; align-items: center; margin-top: 20px">Calculo de Indices dos Professores</h3>
                 <mdb-bar-chart :data="barChartData" :options="barChartOptions" :height="500"/>
@@ -131,12 +131,12 @@ import {mdbBarChart} from 'mdbvue'
         labels: [],
         datasets: [
           {
-            label: 'iRegistro',
+            label: 'iRestritro',
             data: [],
             backgroundColor: 'rgba(245, 74, 85, 0.5)',
             borderWidth: 1
           }, {
-            label: 'iNao Resgistro',
+            label: 'iNao Restritro',
             data: [],
             backgroundColor: 'rgba(90, 173, 246, 0.5)',
             borderWidth: 1
@@ -171,60 +171,60 @@ import {mdbBarChart} from 'mdbvue'
         }
       },
 
-      barChartData2Forma: {
-        labels: [],
-        datasets: [
-          {
-            label: 'iRegistro',
-            data: [],
-            backgroundColor: 'rgba(245, 74, 85, 0.5)',
-            borderWidth: 1
-          }, {
-            label: 'iNao Resgistro',
-            data: [],
-            backgroundColor: 'rgba(90, 173, 246, 0.5)',
-            borderWidth: 1
-          }, {
-            label: 'iGeral',
-            data: [],
-            backgroundColor: 'rgba(245, 192, 50, 0.5)',
-            borderWidth: 1
-          }
-        ]
-      },
-      barChartOptions2Forma: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [{
-            barPercentage: 1,
-            gridLines: {
-              display: true,
-              color: 'rgba(0, 0, 0, 0.1)'
-            }
-          }],
-          yAxes: [{
-            gridLines: {
-              display: true,
-              color: 'rgba(0, 0, 0, 0.1)'
-            },
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      },
+      // barChartData2Forma: {
+      //   labels: [],
+      //   datasets: [
+      //     {
+      //       label: 'iRestritro',
+      //       data: [],
+      //       backgroundColor: 'rgba(245, 74, 85, 0.5)',
+      //       borderWidth: 1
+      //     }, {
+      //       label: 'iNao Restritro',
+      //       data: [],
+      //       backgroundColor: 'rgba(90, 173, 246, 0.5)',
+      //       borderWidth: 1
+      //     }, {
+      //       label: 'iGeral',
+      //       data: [],
+      //       backgroundColor: 'rgba(245, 192, 50, 0.5)',
+      //       borderWidth: 1
+      //     }
+      //   ]
+      // },
+      // barChartOptions2Forma: {
+      //   responsive: true,
+      //   maintainAspectRatio: false,
+      //   scales: {
+      //     xAxes: [{
+      //       barPercentage: 1,
+      //       gridLines: {
+      //         display: true,
+      //         color: 'rgba(0, 0, 0, 0.1)'
+      //       }
+      //     }],
+      //     yAxes: [{
+      //       gridLines: {
+      //         display: true,
+      //         color: 'rgba(0, 0, 0, 0.1)'
+      //       },
+      //       ticks: {
+      //         beginAtZero: true
+      //       }
+      //     }]
+      //   }
+      // },
 
       doutoradoData: {
         labels: [],
         datasets: [
           {
-            label: 'iRegistro',
+            label: 'iRestritro',
             data: [],
             backgroundColor: 'rgba(245, 74, 85, 0.5)',
             borderWidth: 1
           }, {
-            label: 'iNao Resgistro',
+            label: 'iNao Restritro',
             data: [],
             backgroundColor: 'rgba(90, 173, 246, 0.5)',
             borderWidth: 1
@@ -284,6 +284,14 @@ import {mdbBarChart} from 'mdbvue'
           },
           { text: 'iNao Restrito', value: 'iNao_Restrito' },
           { text: 'iGeral', value: 'iGeral' },
+          { text: 'iRestrito(Não Repetido)', 
+            value: 'iRestrito_2_forma',
+            align: 'start',
+            sortable: false,
+          
+          },
+          { text: 'iNao Restrito(Não Repetido)', value: 'iNao_Restrito_2_forma' },
+          { text: 'iGeral(Não Repetido)', value: 'iGeral_2_forma' },
         ],
         titulo: [
           { text: 'iRestrito', value: 'iRestrito_DCC' },
@@ -292,7 +300,6 @@ import {mdbBarChart} from 'mdbvue'
         ],
         ppgcc: [],
         items: [],
-        items2Forma: [],
         mostrarTabela: false,
         anoInicio: null,
         anoFinal: null,
@@ -315,29 +322,32 @@ import {mdbBarChart} from 'mdbvue'
     },
     methods:{
       calcularIndices(){
-        CalculoService.calculoIndicesDoutorado2Forma(this.anoInicio,this.anoFinal).then(res =>{
-          this.items2Forma = res.data
-          this.items2Forma.forEach(element =>{
-            this.barChartData2Forma.labels.push(element.nomeCompleto)
-            this.barChartData2Forma.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
-            // console.log(element.iRestrito)
-            this.barChartData2Forma.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
-            this.barChartData2Forma.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-            // console.log(this.barChartData)
-          })
-        })
+        // CalculoService.calculoIndicesDoutorado2Forma(this.anoInicio,this.anoFinal).then(res =>{
+        //   // console.log("2 Forma")
+        //   // console.log(res.data)
+        //   this.items= res.data
+        //   // this.items2Forma.forEach(element =>{
+        //   //   this.barChartData2Forma.labels.push(element.nomeCompleto)
+        //   //   this.barChartData2Forma.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+        //   //   // console.log(element.iRestrito)
+        //   //   this.barChartData2Forma.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+        //   //   this.barChartData2Forma.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+        //   //   // console.log(this.barChartData)
+        //   // })
+        // })
         
         CalculoService.calculoIndicesDoutorado(this.anoInicio,this.anoFinal).then((res)=>{
+          // console.log(res.data)
           this.items = res.data
-          console.log(this.items)
-          this.items.forEach(element =>{
-            this.barChartData.labels.push(element.nomeCompleto)
-            this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
-            // console.log(element.iRestrito)
-            this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
-            this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-            // console.log(this.barChartData)
-          })
+          // console.log(this.items)
+          // this.items.forEach(element =>{
+          //   this.barChartData.labels.push(element.nomeCompleto)
+          //   this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+          //   // console.log(element.iRestrito)
+          //   this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+          //   this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+          //   // console.log(this.barChartData)
+          // })
           this.mostrarTabela = true
         })
         CalculoService.calculoIndicesDCC(this.anoInicio,this.anoFinal).then((res)=>{
@@ -345,7 +355,7 @@ import {mdbBarChart} from 'mdbvue'
           this.doutoradoData.datasets[0].data.push(parseFloat(res.data[0].iRestrito_DCC.replace(",",".")))
           this.doutoradoData.datasets[1].data.push(parseFloat(res.data[0].iNao_Restrito_DCC.replace(",",".")))
           this.doutoradoData.datasets[2].data.push(parseFloat(res.data[0].iGeral_DCC.replace(",",".")))
-          console.log(res.data)
+          // console.log(res.data)
         })
       },
 
