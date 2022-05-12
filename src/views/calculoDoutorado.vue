@@ -131,19 +131,36 @@ import {mdbBarChart} from 'mdbvue'
         labels: [],
         datasets: [
           {
-            label: 'iRestritro',
+            label: 'iRestrito',
             data: [],
-            backgroundColor: 'rgba(245, 74, 85, 0.5)',
+            backgroundColor: '#276171',
             borderWidth: 1
           }, {
-            label: 'iNao Restritro',
+            label: 'iNao Restrito',
             data: [],
-            backgroundColor: 'rgba(90, 173, 246, 0.5)',
+            backgroundColor: '#3A33B7',
             borderWidth: 1
           }, {
             label: 'iGeral',
             data: [],
-            backgroundColor: 'rgba(245, 192, 50, 0.5)',
+            backgroundColor: '#8784EF',
+            borderWidth: 1
+          },
+          {
+            label: 'iRestrito(Não Repetido)',
+            data: [],
+            backgroundColor: '#965FBE',
+            borderWidth: 1
+          },{
+            label: 'iNao Restrito(Não Repetido)',
+            data: [],
+            backgroundColor: '#b777e6',
+            borderWidth: 1
+          },
+          {
+            label: 'iGeral(Não Repetido)',
+            data: [],
+            backgroundColor: '#c88cf5',
             borderWidth: 1
           }
         ]
@@ -221,19 +238,19 @@ import {mdbBarChart} from 'mdbvue'
           {
             label: 'iRestritro',
             data: [],
-            backgroundColor: 'rgba(245, 74, 85, 0.5)',
+            backgroundColor: '#276171',
             borderWidth: 1
           }, {
             label: 'iNao Restritro',
             data: [],
-            backgroundColor: 'rgba(90, 173, 246, 0.5)',
+            backgroundColor: '#3A33B7',
             borderWidth: 1
           }, {
             label: 'iGeral',
             data: [],
-            backgroundColor: 'rgba(245, 192, 50, 0.5)',
+            backgroundColor: '#8784EF',
             borderWidth: 1
-          }
+          },
         ]
       },
       doutoradoOptions: {
@@ -339,15 +356,19 @@ import {mdbBarChart} from 'mdbvue'
         CalculoService.calculoIndicesDoutorado(this.anoInicio,this.anoFinal).then((res)=>{
           // console.log(res.data)
           this.items = res.data
-          // console.log(this.items)
-          // this.items.forEach(element =>{
-          //   this.barChartData.labels.push(element.nomeCompleto)
-          //   this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
-          //   // console.log(element.iRestrito)
-          //   this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
-          //   this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-          //   // console.log(this.barChartData)
-          // })
+          console.log(this.items)
+          this.items.forEach(element =>{
+            this.barChartData.labels.push(element.nomeCompleto)
+            this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+            // console.log(element.iRestrito)
+            this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+            this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+            this.barChartData.datasets[3].data.push(parseFloat(element.iRestrito_2_forma.replace(",",".")))
+            this.barChartData.datasets[4].data.push(parseFloat(element.iNao_Restrito_2_forma.replace(",",".")))
+            this.barChartData.datasets[5].data.push(parseFloat(element.iGeral_2_forma.replace(",",".")))
+
+            // console.log(this.barChartData)
+          })
           this.mostrarTabela = true
         })
         CalculoService.calculoIndicesDCC(this.anoInicio,this.anoFinal).then((res)=>{

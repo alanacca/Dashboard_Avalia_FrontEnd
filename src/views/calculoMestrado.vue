@@ -135,19 +135,36 @@ import {mdbBarChart} from 'mdbvue'
         labels: [],
         datasets: [
           {
-            label: 'iRegistro',
+            label: 'iRestrito',
             data: [],
-            backgroundColor: 'rgba(245, 74, 85, 0.5)',
+            backgroundColor: '#276171',
             borderWidth: 1
           }, {
-            label: 'iNao Resgistro',
+            label: 'iNao Restrito',
             data: [],
-            backgroundColor: 'rgba(90, 173, 246, 0.5)',
+            backgroundColor: '#3A33B7',
             borderWidth: 1
           }, {
             label: 'iGeral',
             data: [],
-            backgroundColor: 'rgba(245, 192, 50, 0.5)',
+            backgroundColor: '#8784EF',
+            borderWidth: 1
+          },
+          {
+            label: 'iRestrito(Não Repetido)',
+            data: [],
+            backgroundColor: '#965FBE',
+            borderWidth: 1
+          },{
+            label: 'iNao Restrito(Não Repetido)',
+            data: [],
+            backgroundColor: '#b777e6',
+            borderWidth: 1
+          },
+          {
+            label: 'iGeral(Não Repetido)',
+            data: [],
+            backgroundColor: '#c88cf5',
             borderWidth: 1
           }
         ]
@@ -175,69 +192,69 @@ import {mdbBarChart} from 'mdbvue'
         }
       },
 
-      barChartData2Forma: {
-        labels: [],
-        datasets: [
-          {
-            label: 'iRegistro',
-            data: [],
-            backgroundColor: 'rgba(245, 74, 85, 0.5)',
-            borderWidth: 1
-          }, {
-            label: 'iNao Resgistro',
-            data: [],
-            backgroundColor: 'rgba(90, 173, 246, 0.5)',
-            borderWidth: 1
-          }, {
-            label: 'iGeral',
-            data: [],
-            backgroundColor: 'rgba(245, 192, 50, 0.5)',
-            borderWidth: 1
-          }
-        ]
-      },
-      barChartOptions2Forma: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [{
-            barPercentage: 1,
-            gridLines: {
-              display: true,
-              color: 'rgba(0, 0, 0, 0.1)'
-            }
-          }],
-          yAxes: [{
-            gridLines: {
-              display: true,
-              color: 'rgba(0, 0, 0, 0.1)'
-            },
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      },
+      // barChartData2Forma: {
+      //   labels: [],
+      //   datasets: [
+      //     {
+      //       label: 'iRegistro',
+      //       data: [],
+      //       backgroundColor: 'rgba(245, 74, 85, 0.5)',
+      //       borderWidth: 1
+      //     }, {
+      //       label: 'iNao Resgistro',
+      //       data: [],
+      //       backgroundColor: 'rgba(90, 173, 246, 0.5)',
+      //       borderWidth: 1
+      //     }, {
+      //       label: 'iGeral',
+      //       data: [],
+      //       backgroundColor: 'rgba(245, 192, 50, 0.5)',
+      //       borderWidth: 1
+      //     }
+      //   ]
+      // },
+      // barChartOptions2Forma: {
+      //   responsive: true,
+      //   maintainAspectRatio: false,
+      //   scales: {
+      //     xAxes: [{
+      //       barPercentage: 1,
+      //       gridLines: {
+      //         display: true,
+      //         color: 'rgba(0, 0, 0, 0.1)'
+      //       }
+      //     }],
+      //     yAxes: [{
+      //       gridLines: {
+      //         display: true,
+      //         color: 'rgba(0, 0, 0, 0.1)'
+      //       },
+      //       ticks: {
+      //         beginAtZero: true
+      //       }
+      //     }]
+      //   }
+      // },
 
       mestradoData: {
         labels: [],
         datasets: [
           {
-            label: 'iRegistro',
+            label: 'iRestritro',
             data: [],
-            backgroundColor: 'rgba(245, 74, 85, 0.5)',
+            backgroundColor: '#276171',
             borderWidth: 1
           }, {
-            label: 'iNao Resgistro',
+            label: 'iNao Restritro',
             data: [],
-            backgroundColor: 'rgba(90, 173, 246, 0.5)',
+            backgroundColor: '#3A33B7',
             borderWidth: 1
           }, {
             label: 'iGeral',
             data: [],
-            backgroundColor: 'rgba(245, 192, 50, 0.5)',
+            backgroundColor: '#8784EF',
             borderWidth: 1
-          }
+          },
         ]
       },
       mestradoOptions: {
@@ -341,14 +358,16 @@ import {mdbBarChart} from 'mdbvue'
         CalculoService.calculoIndices(this.anoInicio,this.anoFinal).then((res)=>{
           console.log(res.data)
           this.items = res.data
-          // this.items.forEach(element =>{
-          //   this.barChartData.labels.push(element.nomeCompleto)
-          //   this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
-          //   // console.log(element.iRestrito)
-          //   this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
-          //   this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-          //   // console.log(this.barChartData)
-          // })
+          this.items.forEach(element =>{
+            this.barChartData.labels.push(element.nomeCompleto)
+            this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
+            // console.log(element.iRestrito)
+            this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
+            this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
+            this.barChartData.datasets[3].data.push(parseFloat(element.iRestrito_2_forma.replace(",",".")))
+            this.barChartData.datasets[4].data.push(parseFloat(element.iNao_Restrito_2_forma.replace(",",".")))
+            this.barChartData.datasets[5].data.push(parseFloat(element.iGeral_2_forma.replace(",",".")))
+          })
           this.mostrarTabela = true
         })
         CalculoService.calculoIndicesPPGCC(this.anoInicio,this.anoFinal).then((res)=>{
