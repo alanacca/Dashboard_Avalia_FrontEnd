@@ -78,14 +78,14 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
                 console.log(this.pessoaPesquisa)
             },
             pesquisar(){
+                console.log(this.pessoaPesquisa)
                 if(this.pessoaPesquisa!=null && this.platIdPesquisa!=null){
                     this.loading = true
-                    console.log(this.pessoaPesquisa.idPessoa)
+                    // console.log(this.pessoaPesquisa.idPessoa)
                     HomePageService.pesquisar(this.pessoaPesquisa.idPessoa, this.platIdPesquisa)
                     .then((res)=>{
-                        console.log(this.pessoaPesquisa.idPessoa)
-                        this.loading = false
                         console.log(res.data)
+                        this.loading = false
                         if(res.data.fkPlataforma.sigla=="L"){
                             this.$router.push("/dashboard/"+res.data.idPlataforma+"/"+res.data.fkPlataforma.descricao)
                         }
@@ -98,7 +98,7 @@ import * as ManutencaoService from '@/services/ManutencaoService.js'
         beforeMount(){
             ManutencaoService.findAll().then((res)=>{
                 this.cadastrados = res.data
-                // console.log(this.cadastrados)
+                console.log(this.cadastrados)
             })
 
             ManutencaoService.findAllPlats().then((res)=>{

@@ -235,9 +235,11 @@ export default {
         
     },
     beforeMount(){
+        console.log(this.idCurriculo)
         DashBoardService.findByCurriculo(this.idCurriculo).then((res)=>{
+            console.log(res.data)
             this.currentCurriculo = res.data
-            console.log(this.currentCurriculo)
+            // console.log(this.currentCurriculo)
         })
     }
 }
