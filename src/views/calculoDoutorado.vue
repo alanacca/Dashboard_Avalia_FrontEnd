@@ -146,23 +146,23 @@ import {mdbBarChart} from 'mdbvue'
             backgroundColor: '#8784EF',
             borderWidth: 1
           },
-          // {
-          //   label: 'iRestrito(Não Repetido)',
-          //   data: [],
-          //   backgroundColor: '#965FBE',
-          //   borderWidth: 1
-          // },{
-          //   label: 'iNao Restrito(Não Repetido)',
-          //   data: [],
-          //   backgroundColor: '#b777e6',
-          //   borderWidth: 1
-          // },
-          // {
-          //   label: 'iGeral(Não Repetido)',
-          //   data: [],
-          //   backgroundColor: '#c88cf5',
-          //   borderWidth: 1
-          // }
+          {
+            label: 'iRestrito(Não Repetido)',
+            data: [],
+            backgroundColor: '#965FBE',
+            borderWidth: 1
+          },{
+            label: 'iNao Restrito(Não Repetido)',
+            data: [],
+            backgroundColor: '#b777e6',
+            borderWidth: 1
+          },
+          {
+            label: 'iGeral(Não Repetido)',
+            data: [],
+            backgroundColor: '#c88cf5',
+            borderWidth: 1
+          }
         ]
       },
       barChartOptions: {
@@ -301,14 +301,14 @@ import {mdbBarChart} from 'mdbvue'
           },
           { text: 'iNao Restrito', value: 'iNao_Restrito' },
           { text: 'iGeral', value: 'iGeral' },
-          // { text: 'iRestrito(Não Repetido)', 
-          //   value: 'iRestrito_2_forma',
-          //   align: 'start',
-          //   sortable: false,
+          { text: 'iRestrito(Não Repetido)', 
+            value: 'iRestrito_2_forma',
+            align: 'start',
+            sortable: false,
           
-          // },
-          // { text: 'iNao Restrito(Não Repetido)', value: 'iNao_Restrito_2_forma' },
-          // { text: 'iGeral(Não Repetido)', value: 'iGeral_2_forma' },
+          },
+          { text: 'iNao Restrito(Não Repetido)', value: 'iNao_Restrito_2_forma' },
+          { text: 'iGeral(Não Repetido)', value: 'iGeral_2_forma' },
         ],
         titulo: [
           { text: 'iRestrito', value: 'iRestrito_DCC' },
@@ -356,16 +356,16 @@ import {mdbBarChart} from 'mdbvue'
         CalculoService.calculoIndicesDoutorado(this.anoInicio,this.anoFinal).then((res)=>{
           // console.log(res.data)
           this.items = res.data
-          console.log(this.items)
+          // console.log(this.items)
           this.items.forEach(element =>{
             this.barChartData.labels.push(element.nomeCompleto)
             this.barChartData.datasets[0].data.push(parseFloat(element.iRestrito.replace(",",".")))
             // console.log(element.iRestrito)
             this.barChartData.datasets[1].data.push(parseFloat(element.iNao_Restrito.replace(",",".")))
             this.barChartData.datasets[2].data.push(parseFloat(element.iGeral.replace(",",".")))
-            // this.barChartData.datasets[3].data.push(parseFloat(element.iRestrito_2_forma.replace(",",".")))
-            // this.barChartData.datasets[4].data.push(parseFloat(element.iNao_Restrito_2_forma.replace(",",".")))
-            // this.barChartData.datasets[5].data.push(parseFloat(element.iGeral_2_forma.replace(",",".")))
+            this.barChartData.datasets[3].data.push(parseFloat(element.iRestrito_2_forma.replace(",",".")))
+            this.barChartData.datasets[4].data.push(parseFloat(element.iNao_Restrito_2_forma.replace(",",".")))
+            this.barChartData.datasets[5].data.push(parseFloat(element.iGeral_2_forma.replace(",",".")))
 
             // console.log(this.barChartData)
           })
